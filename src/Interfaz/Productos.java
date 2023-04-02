@@ -8,12 +8,12 @@ package Interfaz;
  *
  * @author Lenovo
  */
-public class Insumos extends javax.swing.JFrame {
+public class Productos extends javax.swing.JFrame {
 
     /**
-     * Creates new form Insumos
+     * Creates new form Productos
      */
-    public Insumos() {
+    public Productos() {
         initComponents();
     }
 
@@ -27,57 +27,57 @@ public class Insumos extends javax.swing.JFrame {
     private void initComponents() {
 
         jDialog1 = new javax.swing.JDialog();
+        jTextField2 = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
+        jTextField4 = new javax.swing.JTextField();
         jTextField5 = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
         jTextField7 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
         jTextField8 = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jLabel6 = new javax.swing.JLabel();
 
-        jDialog1.setTitle("Guardar insumo");
-
-        jTextField5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField5.setForeground(new java.awt.Color(150, 150, 150));
-        jTextField5.setText("Costo:");
-
-        jTextField6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField6.setForeground(new java.awt.Color(150, 150, 150));
-        jTextField6.setText("Categoria:");
-
-        jTextField7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField7.setForeground(new java.awt.Color(150, 150, 150));
-        jTextField7.setText("Proveedor:");
-
-        jTextField4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField4.setForeground(new java.awt.Color(150, 150, 150));
-        jTextField4.setText("Unidad de medición:");
-
-        jTextField3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField3.setForeground(new java.awt.Color(150, 150, 150));
-        jTextField3.setText("Cantidad:");
+        jDialog1.setTitle("Guardar producto");
 
         jTextField2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextField2.setForeground(new java.awt.Color(150, 150, 150));
         jTextField2.setText("Nombre:");
 
-        jLabel7.setText("Ic. Registrar");
+        jTextField3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField3.setForeground(new java.awt.Color(150, 150, 150));
+        jTextField3.setText("Existencia:");
+
+        jTextField4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField4.setForeground(new java.awt.Color(150, 150, 150));
+        jTextField4.setText("Costo:");
+
+        jTextField5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField5.setForeground(new java.awt.Color(150, 150, 150));
+        jTextField5.setText("Precio:");
+
+        jTextField6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField6.setForeground(new java.awt.Color(150, 150, 150));
+        jTextField6.setText("Fecha de esxpiración:");
+
+        jTextField7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField7.setForeground(new java.awt.Color(150, 150, 150));
+        jTextField7.setText("Tipo:");
 
         jTextField8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextField8.setForeground(new java.awt.Color(150, 150, 150));
-        jTextField8.setText("Fecha de caducidad:");
+        jTextField8.setText("Preparación:");
+
+        jLabel7.setText("Ic. Registrar");
 
         jLabel8.setText("Ic. Salir");
 
@@ -90,7 +90,7 @@ public class Insumos extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jDialog1Layout.createSequentialGroup()
-                .addGap(102, 102, 102)
+                .addGap(110, 110, 110)
                 .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -99,7 +99,7 @@ public class Insumos extends javax.swing.JFrame {
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(118, Short.MAX_VALUE))
+                .addContainerGap(110, Short.MAX_VALUE))
         );
         jDialog1Layout.setVerticalGroup(
             jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,32 +125,32 @@ public class Insumos extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Insumos");
+        setTitle("Productos");
 
         jLabel2.setText("Ic. Menú");
 
-        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Criterio de búsqueda", "Nombre", "Cantidad", "Unidad de medición", "Costo", "Categoria", "Proveedor", "Fecha de caducidad" }));
+        jLabel6.setText("Ic. Insumos");
 
         jLabel1.setText("Ic. Buscar");
 
-        jLabel5.setText("Ic. Eliminar");
+        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Criterio de búsqueda", "Nombre", "Existencia", "Costo", "Precio", "Fecha expiración", "Tipo", "Preparación" }));
+
+        jLabel3.setText("Ic. Guardar");
 
         jLabel4.setText("Ic. Actualizar");
 
-        jLabel3.setText("Ic. Guardar");
+        jLabel5.setText("Ic. Eliminar");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Nombre", "Cantidad", "U. Medición", "Costo", "Categoria", "Proveedor", "Caducidad"
+                "Nombre", "Existencia", "Costo", "Precio", "Fc. Expiración", "Tipo", "Preparación"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
-
-        jLabel6.setText("Ic. Productos");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -224,20 +224,20 @@ public class Insumos extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Insumos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Productos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Insumos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Productos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Insumos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Productos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Insumos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Productos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Insumos().setVisible(true);
+                new Productos().setVisible(true);
             }
         });
     }
