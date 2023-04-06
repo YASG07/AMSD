@@ -77,7 +77,7 @@ COLLATE = utf8mb4_spanish_ci;
 DROP TABLE IF EXISTS `alphamanagersd`.`usuarios` ;
 
 CREATE TABLE IF NOT EXISTS `alphamanagersd`.`usuarios` (
-  `PK_NombreU` VARCHAR(30) NOT NULL,
+  `PK_NombreU` VARCHAR(30) NOT NULL UNIQUE,
   `contraseña_user` VARCHAR(30) NOT NULL,
   `CURP` VARCHAR(18) NOT NULL,
   `RFC` VARCHAR(13) NOT NULL,
