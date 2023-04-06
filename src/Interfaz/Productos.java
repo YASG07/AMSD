@@ -7,13 +7,16 @@ package Interfaz;
 import Clases.Metodos;
 import static Clases.Metodos.con;
 import static Clases.Metodos.st;
+import java.awt.Event;
+import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.showMessageDialog;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
-
-
 
 /**
  *
@@ -28,24 +31,26 @@ public class Productos extends javax.swing.JFrame {
         initComponents();
         Metodos.ConectarBD();
         llenarTabla();
-        
+
     }
-    
+
     int idc;
     DefaultTableModel m;
-    private void llenarTabla(){
+
+    private void llenarTabla() {
         //Inicializamos la tabla con un modelo
         DefaultTableModel Tabla = (DefaultTableModel) tblProductos.getModel();
         //arreglo para almacenar el resultado de cada campo varia de acuerdo a los campos a consultar
-        Object [] row = new Object[8];
+        Object[] row = new Object[8];
         try {
             //inicializamos la variable de tipo statemente
             st = con.createStatement();
             //sentencia SELECT a ejecutar
             String query = "SELECT * FROM Productos";
             //Ejecuta la sentencia SELECT con los parametros recibidos
-            ResultSet rs = st.executeQuery(query);                                                                                                                                                      rs = st.executeQuery(query);
-            while(rs.next()){
+            ResultSet rs = st.executeQuery(query);
+            rs = st.executeQuery(query);
+            while (rs.next()) {
                 row[0] = rs.getString(1);
                 row[1] = rs.getString(2);
                 row[2] = rs.getString(3);
@@ -54,154 +59,323 @@ public class Productos extends javax.swing.JFrame {
                 row[5] = rs.getInt(6);
                 row[6] = rs.getInt(7);
                 row[7] = rs.getDate(8);
-                
+
                 Tabla.addRow(row);
                 //el tipo de dato varia en función del campo al que correponde
                 //el numero de instrucciones debe coincidir con el total de campos en la tabla
             }//ciclo while guarda los valores obtenidos de la consulta en las varibables que se muestran.
         } catch (SQLException ex) {
-            showMessageDialog(this, "Error en "+ex);
+            showMessageDialog(this, "Error en " + ex);
             System.exit(EXIT_ON_CLOSE);
             //En caso de encontrar dicha excepción envia un mensaje y termina el bloque
         }//error en la sentencia SQL
     }
-    private void borrarDatos(){
+
+    private void borrarDatos() {
         int fila = tblProductos.getSelectedRow();
         try {
-            if (fila<0) {
+            if (fila < 0) {
                 showMessageDialog(null, "No ha seleccionado un producto");
-            }else{
-                String query = "DELETE FROM PRODUCTOS where idProduc="+idc;
+            } else {
+                String query = "DELETE FROM PRODUCTOS where idProduc=" + idc;
                 st = con.createStatement();
                 st.executeUpdate(query);
-                
-                showMessageDialog(null,"Producto eliminado");
-                
+
+                showMessageDialog(null, "Producto eliminado");
+
             }
         } catch (SQLException e) {
-            showMessageDialog(null,"Ocurrio un error con la consulta"+e);
+            showMessageDialog(null, "Ocurrio un error con la consulta" + e);
         }
     }
+
+    private void registrar() {
+        String nomP = txtNombreRp.getText();
+        String Prepa = txtPrepaRp.getText();
+        String tipoP = txtTipoRp.getText();
+        int costoP = Integer.parseInt(txtCostoRp.getText());
+        int precioP = Integer.parseInt(txtPrecioRp.getText());
+        int existP = Integer.parseInt(txtExistenciaRp.getText());
+        String fechaEx = txtFechaExpRp.getText();
+        try {
+            String sql = "INSERT INTO PRODUCTOS(nombre_produc,preparacion_produc,tipo_produc,costo_produc,precio_produc, existencia, FchExpira)"
+                    + "VALUES ('" + nomP + "','" + Prepa + "','" + tipoP + "','" + costoP + "','" + precioP + "','" + existP + "','" + fechaEx + "')";
+            st = con.createStatement();
+            st.executeUpdate(sql);
+            showMessageDialog(null, "Producto Registrado");
+        } catch (SQLException ex) {
+            showMessageDialog(null, "Ocurrio un error en la consulta" + ex);
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jDAcProd = new javax.swing.JDialog();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        txtNomAc = new javax.swing.JTextField();
+        txtExisAc = new javax.swing.JTextField();
+        txtCostoAc = new javax.swing.JTextField();
+        txtPrecioAc = new javax.swing.JTextField();
+        txtFechaExAc = new javax.swing.JTextField();
+        txtTipoAc = new javax.swing.JTextField();
+        txtPrepaAc = new javax.swing.JTextField();
+        lblActualizarJDAc = new javax.swing.JLabel();
+        lblRegresarJDAc = new javax.swing.JLabel();
+        jDArProd = new javax.swing.JDialog();
+        txtNombreRp = new javax.swing.JTextField();
+        txtExistenciaRp = new javax.swing.JTextField();
+        txtCostoRp = new javax.swing.JTextField();
+        txtPrecioRp = new javax.swing.JTextField();
+        txtFechaExpRp = new javax.swing.JTextField();
+        txtTipoRp = new javax.swing.JTextField();
+        txtPrepaRp = new javax.swing.JTextField();
+        lblRegistrarJDRp = new javax.swing.JLabel();
+        lblRegresarJDRp = new javax.swing.JLabel();
         lblRMenu = new javax.swing.JLabel();
         lblInsumos = new javax.swing.JLabel();
         lblBuscar = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        txtBuscar = new javax.swing.JTextField();
+        jcCriBusqueda = new javax.swing.JComboBox<>();
         lblGuardar = new javax.swing.JLabel();
         lblActualizar = new javax.swing.JLabel();
         lblEliminar = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProductos = new javax.swing.JTable();
 
-        jDAcProd.setTitle("Guardar producto");
+        jDAcProd.setTitle("Actualizar Producto");
         jDAcProd.setLocation(new java.awt.Point(0, 0));
-        jDAcProd.setMaximumSize(new java.awt.Dimension(430, 430));
         jDAcProd.setMinimumSize(new java.awt.Dimension(430, 430));
-        jDAcProd.setPreferredSize(new java.awt.Dimension(430, 430));
         jDAcProd.setResizable(false);
 
-        jTextField2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField2.setForeground(new java.awt.Color(150, 150, 150));
-        jTextField2.setText("Nombre:");
+        txtNomAc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtNomAc.setForeground(new java.awt.Color(150, 150, 150));
+        txtNomAc.setText("Nombre:");
 
-        jTextField3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField3.setForeground(new java.awt.Color(150, 150, 150));
-        jTextField3.setText("Existencia:");
+        txtExisAc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtExisAc.setForeground(new java.awt.Color(150, 150, 150));
+        txtExisAc.setText("Existencia:");
 
-        jTextField4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField4.setForeground(new java.awt.Color(150, 150, 150));
-        jTextField4.setText("Costo:");
+        txtCostoAc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtCostoAc.setForeground(new java.awt.Color(150, 150, 150));
+        txtCostoAc.setText("Costo:");
 
-        jTextField5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField5.setForeground(new java.awt.Color(150, 150, 150));
-        jTextField5.setText("Precio:");
+        txtPrecioAc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtPrecioAc.setForeground(new java.awt.Color(150, 150, 150));
+        txtPrecioAc.setText("Precio:");
 
-        jTextField6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField6.setForeground(new java.awt.Color(150, 150, 150));
-        jTextField6.setText("Fecha de esxpiración:");
+        txtFechaExAc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtFechaExAc.setForeground(new java.awt.Color(150, 150, 150));
+        txtFechaExAc.setText("Fecha de esxpiración:");
 
-        jTextField7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField7.setForeground(new java.awt.Color(150, 150, 150));
-        jTextField7.setText("Tipo:");
+        txtTipoAc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtTipoAc.setForeground(new java.awt.Color(150, 150, 150));
+        txtTipoAc.setText("Tipo:");
 
-        jTextField8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField8.setForeground(new java.awt.Color(150, 150, 150));
-        jTextField8.setText("Preparación:");
+        txtPrepaAc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtPrepaAc.setForeground(new java.awt.Color(150, 150, 150));
+        txtPrepaAc.setText("Preparación:");
 
-        jLabel7.setText("Ic. Registrar");
+        lblActualizarJDAc.setText("Act. regis");
 
-        jLabel8.setText("Ic. Salir");
+        lblRegresarJDAc.setText("Ic. Salir");
+        lblRegresarJDAc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblRegresarJDAcMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jDAcProdLayout = new javax.swing.GroupLayout(jDAcProd.getContentPane());
         jDAcProd.getContentPane().setLayout(jDAcProdLayout);
         jDAcProdLayout.setHorizontalGroup(
             jDAcProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDAcProdLayout.createSequentialGroup()
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblRegresarJDAc, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(lblActualizarJDAc, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jDAcProdLayout.createSequentialGroup()
                 .addGap(110, 110, 110)
                 .addGroup(jDAcProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPrepaAc, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTipoAc, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFechaExAc, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPrecioAc, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCostoAc, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtExisAc, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNomAc, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(110, Short.MAX_VALUE))
         );
         jDAcProdLayout.setVerticalGroup(
             jDAcProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDAcProdLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtNomAc, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtExisAc, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtCostoAc, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtPrecioAc, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtFechaExAc, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtTipoAc, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtPrepaAc, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addGroup(jDAcProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(lblActualizarJDAc, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblRegresarJDAc, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+
+        jDArProd.setTitle("Guardar producto");
+        jDArProd.setLocation(new java.awt.Point(0, 0));
+        jDArProd.setMinimumSize(new java.awt.Dimension(430, 430));
+        jDArProd.setResizable(false);
+
+        txtNombreRp.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtNombreRp.setForeground(new java.awt.Color(150, 150, 150));
+        txtNombreRp.setText("Nombre:");
+
+        txtExistenciaRp.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtExistenciaRp.setForeground(new java.awt.Color(150, 150, 150));
+        txtExistenciaRp.setText("Existencia:");
+
+        txtCostoRp.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtCostoRp.setForeground(new java.awt.Color(150, 150, 150));
+        txtCostoRp.setText("Costo:");
+        txtCostoRp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCostoRpKeyTyped(evt);
+            }
+        });
+
+        txtPrecioRp.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtPrecioRp.setForeground(new java.awt.Color(150, 150, 150));
+        txtPrecioRp.setText("Precio:");
+        txtPrecioRp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPrecioRpKeyTyped(evt);
+            }
+        });
+
+        txtFechaExpRp.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtFechaExpRp.setForeground(new java.awt.Color(150, 150, 150));
+        txtFechaExpRp.setText("Fecha de esxpiración:");
+        txtFechaExpRp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtFechaExpRpKeyTyped(evt);
+            }
+        });
+
+        txtTipoRp.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtTipoRp.setForeground(new java.awt.Color(150, 150, 150));
+        txtTipoRp.setText("Tipo:");
+        txtTipoRp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTipoRpKeyTyped(evt);
+            }
+        });
+
+        txtPrepaRp.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtPrepaRp.setForeground(new java.awt.Color(150, 150, 150));
+        txtPrepaRp.setText("Preparación:");
+        txtPrepaRp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPrepaRpKeyTyped(evt);
+            }
+        });
+
+        lblRegistrarJDRp.setText("Ic. Registrar");
+        lblRegistrarJDRp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblRegistrarJDRpMouseClicked(evt);
+            }
+        });
+
+        lblRegresarJDRp.setText("Ic. Salir");
+        lblRegresarJDRp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblRegresarJDRpMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jDArProdLayout = new javax.swing.GroupLayout(jDArProd.getContentPane());
+        jDArProd.getContentPane().setLayout(jDArProdLayout);
+        jDArProdLayout.setHorizontalGroup(
+            jDArProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDArProdLayout.createSequentialGroup()
+                .addComponent(lblRegresarJDRp, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblRegistrarJDRp, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jDArProdLayout.createSequentialGroup()
+                .addGap(110, 110, 110)
+                .addGroup(jDArProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtPrepaRp, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTipoRp, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFechaExpRp, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPrecioRp, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCostoRp, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtExistenciaRp, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNombreRp, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(110, Short.MAX_VALUE))
+        );
+        jDArProdLayout.setVerticalGroup(
+            jDArProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDArProdLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(txtNombreRp, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(txtExistenciaRp, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(txtCostoRp, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(txtPrecioRp, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(txtFechaExpRp, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(txtTipoRp, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(txtPrepaRp, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addGroup(jDArProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblRegistrarJDRp, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblRegresarJDRp, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Productos");
 
         lblRMenu.setText("Ic. Menú");
+        lblRMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblRMenuMouseClicked(evt);
+            }
+        });
 
         lblInsumos.setText("Ic. Insumos");
+        lblInsumos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblInsumosMouseClicked(evt);
+            }
+        });
 
         lblBuscar.setText("Ic. Buscar");
+        lblBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblBuscarMouseClicked(evt);
+            }
+        });
 
-        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Criterio de búsqueda", "Nombre", "Existencia", "Costo", "Precio", "Fecha expiración", "Tipo", "Preparación" }));
+        jcCriBusqueda.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jcCriBusqueda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Criterio de búsqueda", "Nombre", "Precio", "Tipo" }));
 
         lblGuardar.setText("Ic. Guardar");
+        lblGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblGuardarMouseClicked(evt);
+            }
+        });
 
         lblActualizar.setText("Ic. Actualizar");
         lblActualizar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -256,7 +430,7 @@ public class Productos extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(110, 110, 110)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jcCriBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -265,7 +439,7 @@ public class Productos extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(lblEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)))
                         .addGap(100, 100, 100)))
@@ -283,8 +457,8 @@ public class Productos extends javax.swing.JFrame {
                     .addComponent(lblRMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcCriBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -307,11 +481,11 @@ public class Productos extends javax.swing.JFrame {
 
     private void tblProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProductosMouseClicked
         int fila = tblProductos.getSelectedRow();
-        if (fila==-1){
-          showMessageDialog(null, "No ha seleccionado un producto");  
-        }else{
-            idc  = Integer.parseInt((String) tblProductos.getValueAt(fila, 0).toString());
-            nomP = (String) tblProductos.getValueAt(fila, 1);
+        if (fila == -1) {
+            showMessageDialog(null, "No ha seleccionado un producto");
+        } else {
+            idc = Integer.parseInt((String) tblProductos.getValueAt(fila, 0).toString());
+            String nomP = (String) tblProductos.getValueAt(fila, 1);
             System.out.println(nomP);
         }
     }//GEN-LAST:event_tblProductosMouseClicked
@@ -321,15 +495,184 @@ public class Productos extends javax.swing.JFrame {
         jDAcProd.setLocationRelativeTo(this);
     }//GEN-LAST:event_lblActualizarMouseClicked
 
-     String nomP;
-     String Prepa;
-     String TipoP;
-     int CostoP;
-     int PreP;
-     int exis;
-     int fchEx;
-     
-    
+    private void lblRMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRMenuMouseClicked
+        Principal pc = new Principal();
+        Metodos.Cambiar_Ventana(pc, this);
+    }//GEN-LAST:event_lblRMenuMouseClicked
+
+    private void lblInsumosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblInsumosMouseClicked
+        Insumos in = new Insumos();
+        Metodos.Cambiar_Ventana(in, this);
+    }//GEN-LAST:event_lblInsumosMouseClicked
+
+    private void lblRegresarJDAcMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegresarJDAcMouseClicked
+        jDAcProd.dispose();
+    }//GEN-LAST:event_lblRegresarJDAcMouseClicked
+
+    private void lblGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblGuardarMouseClicked
+        jDArProd.setVisible(true);
+        jDArProd.setLocationRelativeTo(this);
+    }//GEN-LAST:event_lblGuardarMouseClicked
+
+    private void lblRegresarJDRpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegresarJDRpMouseClicked
+        jDArProd.dispose();
+    }//GEN-LAST:event_lblRegresarJDRpMouseClicked
+
+    private void lblRegistrarJDRpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegistrarJDRpMouseClicked
+        registrar();
+        Metodos.vaciarTabla(m, tblProductos);
+        llenarTabla();
+    }//GEN-LAST:event_lblRegistrarJDRpMouseClicked
+
+    private void txtCostoRpKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCostoRpKeyTyped
+        int key = evt.getKeyChar();
+        if (Character.isDigit(key) || key == KeyEvent.VK_BACK_SPACE || key == KeyEvent.VK_ENTER) {
+            if (key == KeyEvent.VK_ENTER) {
+                txtPrecioRp.requestFocus();
+            }
+        } else {
+            evt.consume();
+            showMessageDialog(this, "Por favor introducir solo números");
+        }
+        ////
+
+    }//GEN-LAST:event_txtCostoRpKeyTyped
+
+    private void txtPrecioRpKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioRpKeyTyped
+        int key = evt.getKeyChar();
+        if (Character.isDigit(key) || key == KeyEvent.VK_BACK_SPACE || key == KeyEvent.VK_ENTER) {
+            if (key == KeyEvent.VK_ENTER) {
+                txtFechaExpRp.requestFocus();
+            }
+        } else {
+            evt.consume();
+            showMessageDialog(this, "Por favor introducir solo números");
+        }
+        //// 
+    }//GEN-LAST:event_txtPrecioRpKeyTyped
+
+    private void txtFechaExpRpKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFechaExpRpKeyTyped
+        int key = evt.getKeyChar();
+        if (Character.isDigit(key) || key == KeyEvent.VK_BACK_SPACE || key == KeyEvent.VK_ENTER || key == '-') {
+            if (key == KeyEvent.VK_ENTER) {
+                txtTipoRp.requestFocus();
+            }
+        } else {
+            evt.consume();
+            showMessageDialog(this, "Por favor introducir solo números");
+        }
+        ////
+    }//GEN-LAST:event_txtFechaExpRpKeyTyped
+
+    private void txtPrepaRpKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrepaRpKeyTyped
+        int key = evt.getKeyChar();
+        if (key == KeyEvent.VK_ENTER) {
+            //registrar();
+            showMessageDialog(this, "hola");
+        }
+    }//GEN-LAST:event_txtPrepaRpKeyTyped
+
+    private void txtTipoRpKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTipoRpKeyTyped
+        int key = evt.getKeyChar();
+        if (Character.isLetter(key) || key == KeyEvent.VK_BACK_SPACE || key == KeyEvent.VK_ENTER) {
+            if (key == KeyEvent.VK_ENTER) {
+                txtPrepaRp.requestFocus();
+            }
+        } else {
+            evt.consume();
+            showMessageDialog(this, "Por favor introducir solo letras");
+        }
+        ////  
+    }//GEN-LAST:event_txtTipoRpKeyTyped
+
+    private void lblBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBuscarMouseClicked
+
+        if (jcCriBusqueda.getSelectedItem().toString().equals("Criterio de búsqueda")) {
+            showMessageDialog(this, "Favor de Elegir un Criterio de Búsqueda");
+        } else {
+            if (jcCriBusqueda.getSelectedItem().toString().equals("Nombre")) {
+                String titulos[] = {"idProduc", "nombre_produc", "preparacion_produc", "tipo_produc", "costo_produc", "precio_produc", "existencia", "FchExpira"};
+                Object[] row = new Object[8];
+                try {
+                    String sqlN = "SELECT * FROM Productos WHERE nombre_produc LIKE '%" + txtBuscar.getText() + "%'";
+                    st = con.createStatement();
+                    DefaultTableModel Tabla = new DefaultTableModel(null, titulos);
+                    ResultSet rs = st.executeQuery(sqlN);
+                    while (rs.next()) {
+                        row[0] = rs.getInt("idProduc");
+                        row[1] = rs.getString("nombre_produc");
+                        row[2] = rs.getString("preparacion_produc");
+                        row[3] = rs.getString("tipo_produc");
+                        row[4] = rs.getInt("costo_produc");
+                        row[5] = rs.getInt("precio_produc");
+                        row[6] = rs.getInt("existencia");
+                        row[7] = rs.getDate("FchExpira");
+
+                        Tabla.addRow(row);
+                    }
+
+                    tblProductos.setModel(Tabla);
+                } catch (SQLException ex) {
+                    showMessageDialog(this, "Error al filtrar los datos" + ex.getMessage(), "Error", ERROR_MESSAGE);
+                }
+            } else {
+                if (jcCriBusqueda.getSelectedItem().toString().equals("Precio")) {
+                    String titulos[] = {"idProduc", "nombre_produc", "preparacion_produc", "tipo_produc", "costo_produc", "precio_produc", "existencia", "FchExpira"};
+                    Object[] row = new Object[8];
+                    try {
+                        String sqlN = "SELECT * FROM Productos WHERE precio_produc LIKE '%" + txtBuscar.getText() + "%'";
+                        st = con.createStatement();
+                        DefaultTableModel Tabla = new DefaultTableModel(null, titulos);
+                        ResultSet rs = st.executeQuery(sqlN);
+                        while (rs.next()) {
+                            row[0] = rs.getInt("idProduc");
+                            row[1] = rs.getString("nombre_produc");
+                            row[2] = rs.getString("preparacion_produc");
+                            row[3] = rs.getString("tipo_produc");
+                            row[4] = rs.getInt("costo_produc");
+                            row[5] = rs.getInt("precio_produc");
+                            row[6] = rs.getInt("existencia");
+                            row[7] = rs.getDate("FchExpira");
+
+                            Tabla.addRow(row);
+                        }
+
+                        tblProductos.setModel(Tabla);
+                    } catch (SQLException ex) {
+                        showMessageDialog(this, "Error al filtrar los datos" + ex.getMessage(), "Error", ERROR_MESSAGE);
+                    }
+                } else {
+                    if (jcCriBusqueda.getSelectedItem().toString().equals("Tipo")) {
+                        String titulos[] = {"idProduc", "nombre_produc", "preparacion_produc", "tipo_produc", "costo_produc", "precio_produc", "existencia", "FchExpira"};
+                        Object[] row = new Object[8];
+                        try {
+                            String sqlN = "SELECT * FROM Productos WHERE tipo_produc LIKE '%" + txtBuscar.getText() + "%'";
+                            st = con.createStatement();
+                            DefaultTableModel Tabla = new DefaultTableModel(null, titulos);
+                            ResultSet rs = st.executeQuery(sqlN);
+                            while (rs.next()) {
+                                row[0] = rs.getInt("idProduc");
+                                row[1] = rs.getString("nombre_produc");
+                                row[2] = rs.getString("preparacion_produc");
+                                row[3] = rs.getString("tipo_produc");
+                                row[4] = rs.getInt("costo_produc");
+                                row[5] = rs.getInt("precio_produc");
+                                row[6] = rs.getInt("existencia");
+                                row[7] = rs.getDate("FchExpira");
+
+                                Tabla.addRow(row);
+                            }
+
+                            tblProductos.setModel(Tabla);
+                        } catch (SQLException ex) {
+                            showMessageDialog(this, "Error al filtrar los datos" + ex.getMessage(), "Error", ERROR_MESSAGE);
+                        }
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_lblBuscarMouseClicked
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -363,25 +706,35 @@ public class Productos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
     public javax.swing.JDialog jDAcProd;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
+    public javax.swing.JDialog jDArProd;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
+    private javax.swing.JComboBox<String> jcCriBusqueda;
     private javax.swing.JLabel lblActualizar;
+    private javax.swing.JLabel lblActualizarJDAc;
     private javax.swing.JLabel lblBuscar;
     private javax.swing.JLabel lblEliminar;
     private javax.swing.JLabel lblGuardar;
     private javax.swing.JLabel lblInsumos;
     private javax.swing.JLabel lblRMenu;
+    private javax.swing.JLabel lblRegistrarJDRp;
+    private javax.swing.JLabel lblRegresarJDAc;
+    private javax.swing.JLabel lblRegresarJDRp;
     private javax.swing.JTable tblProductos;
+    private javax.swing.JTextField txtBuscar;
+    private javax.swing.JTextField txtCostoAc;
+    private javax.swing.JTextField txtCostoRp;
+    private javax.swing.JTextField txtExisAc;
+    private javax.swing.JTextField txtExistenciaRp;
+    private javax.swing.JTextField txtFechaExAc;
+    private javax.swing.JTextField txtFechaExpRp;
+    private javax.swing.JTextField txtNomAc;
+    private javax.swing.JTextField txtNombreRp;
+    private javax.swing.JTextField txtPrecioAc;
+    private javax.swing.JTextField txtPrecioRp;
+    private javax.swing.JTextField txtPrepaAc;
+    private javax.swing.JTextField txtPrepaRp;
+    private javax.swing.JTextField txtTipoAc;
+    private javax.swing.JTextField txtTipoRp;
     // End of variables declaration//GEN-END:variables
 }
