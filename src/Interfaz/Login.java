@@ -14,6 +14,7 @@ import static javax.swing.JOptionPane.showMessageDialog;
  */
 public class Login extends javax.swing.JFrame {
 
+    public static String Usuario = ""; 
     /**
      * Creates new form Login
      */
@@ -121,7 +122,7 @@ public class Login extends javax.swing.JFrame {
                 showMessageDialog(this, "Usuario y/o contraseña incorrecto.");
                 break;
             case 1:
-               Principal admin = new Principal();
+                Principal admin = new Principal();
                 Cambiar_Ventana(admin, this);
                 break;
             case 2:
@@ -133,6 +134,7 @@ public class Login extends javax.swing.JFrame {
                 Cambiar_Ventana(E_vent, this);
                 break;
         }//inicio de sesion. 
+        Usuario = jtfUsuario.getText();
     }//GEN-LAST:event_lblLoginMouseClicked
 
     /**

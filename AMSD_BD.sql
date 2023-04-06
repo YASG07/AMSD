@@ -25,11 +25,11 @@ DROP TABLE IF EXISTS `alphamanagersd`.`insumos` ;
 CREATE TABLE IF NOT EXISTS `alphamanagersd`.`insumos` (
   `idIns` INT(11) NOT NULL AUTO_INCREMENT,
   `nombre_ins` VARCHAR(25) NOT NULL,
-  `cantidad_ins` INT(11) NOT NULL,
-  `unidadMed_ins` INT(11) NOT NULL,
-  `categoria_ins` INT(11) NOT NULL,
-  `nombreProv_ins` INT(11) NOT NULL,
-  `costo_ins` INT(11) NOT NULL,
+  `cantidad_ins` INT NOT NULL,
+  `unidadMed_ins` VARCHAR(25) NOT NULL,
+  `categoria_ins` VARCHAR(25) NOT NULL,
+  `nombreProv_ins` VARCHAR(25) NOT NULL,
+  `costo_ins` FLOAT(4,2) NOT NULL,
   `FchCaducidad` DATE NOT NULL,
   PRIMARY KEY (`idIns`))
 ENGINE = InnoDB
@@ -45,11 +45,11 @@ DROP TABLE IF EXISTS `alphamanagersd`.`productos` ;
 CREATE TABLE IF NOT EXISTS `alphamanagersd`.`productos` (
   `idProduc` INT(11) NOT NULL AUTO_INCREMENT,
   `nombre_produc` VARCHAR(25) NOT NULL,
-  `preparacion_produc` VARCHAR(100) NOT NULL,
+  `preparacion_produc` MEDIUMTEXT NOT NULL,
   `tipo_produc` VARCHAR(25) NOT NULL,
-  `costo_produc` INT(11) NOT NULL,
-  `precio_produc` INT(11) NOT NULL,
-  `existencia` INT(11) NOT NULL,
+  `costo_produc` FLOAT(4,2) NOT NULL,
+  `precio_produc` FLOAT(4,2) NOT NULL,
+  `existencia` TINYINT(2) NOT NULL,
   `FchExpira` DATE NOT NULL,
   PRIMARY KEY (`idProduc`))
 ENGINE = InnoDB
@@ -63,7 +63,7 @@ COLLATE = utf8mb4_spanish_ci;
 DROP TABLE IF EXISTS `alphamanagersd`.`roles` ;
 
 CREATE TABLE IF NOT EXISTS `alphamanagersd`.`roles` (
-  `idRol` INT(11) NOT NULL,
+  `idRol` INT(2) NOT NULL,
   `nombre_rol` VARCHAR(30) NOT NULL,
   PRIMARY KEY (`idRol`))
 ENGINE = InnoDB
@@ -81,9 +81,10 @@ CREATE TABLE IF NOT EXISTS `alphamanagersd`.`usuarios` (
   `contraseña_user` VARCHAR(30) NOT NULL,
   `CURP` VARCHAR(18) NOT NULL,
   `RFC` VARCHAR(13) NOT NULL,
-  `telefono` INT(11) NULL,
-  `roles_idRol` INT(11) NOT NULL,
+  `telefono` VARCHAR(12) NULL,
+  `roles_idRol` INT(2) NOT NULL,
   PRIMARY KEY (`PK_NombreU`),
+  UNIQUE INDEX `PK_NombreU_UNIQUE` (`PK_NombreU` ASC) VISIBLE,
   INDEX `fk_usuarios_roles1_idx` (`roles_idRol` ASC) VISIBLE,
   CONSTRAINT `fk_usuarios_roles1`
     FOREIGN KEY (`roles_idRol`)
@@ -103,9 +104,9 @@ DROP TABLE IF EXISTS `alphamanagersd`.`ventas` ;
 CREATE TABLE IF NOT EXISTS `alphamanagersd`.`ventas` (
   `Nu_venta` INT(11) NOT NULL AUTO_INCREMENT,
   `fecha_venta` DATE NOT NULL,
-  `precioTot_venta` INT(11) NOT NULL,
-  `ganancia_venta` INT(11) NOT NULL,
-  `costoTot_venta` INT(11) NOT NULL,
+  `precioTot_venta` FLOAT(4,2) NOT NULL,
+  `ganancia_venta` FLOAT(4,2) NOT NULL,
+  `costoTot_venta` FLOAT(4,2) NOT NULL,
   `estado_venta` VARCHAR(25) NOT NULL,
   `usuarios_nombre_user` VARCHAR(30) NOT NULL,
   PRIMARY KEY (`Nu_venta`, `usuarios_nombre_user`),

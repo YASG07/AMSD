@@ -12,6 +12,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import static javax.swing.JOptionPane.showMessageDialog;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -59,7 +60,7 @@ public class Metodos {
             return;
             //En caso de encontrar dicha excepción envia un mensaje y termina el bloque
         }//error en la sentencia SQL
-        showMessageDialog(JF, "Registrado con éxito.");
+        showMessageDialog(JF, "Operación finalizada con éxito.");
     }//Metodo para ejecutar INSERT, UPDATE y DELETE.
     
     /*public static void main(String[] args) {
@@ -80,6 +81,7 @@ public class Metodos {
         JD.setSize(Ancho, Alto);
         JD.setLocationRelativeTo(JF);//posiciona el cuadro de diálogo en el centro de la ventana.
         JD.setVisible(true);
+        JD.requestFocus();
     }//Metodo para abrir un cuadro de dialogo
     
     //meetodo para vaciar una tabla recibe un modelo de tabla y una tabla (JTable) 
@@ -91,6 +93,17 @@ public class Metodos {
             Modelo.removeRow(i);
         }//metodo while para remover los renglones de la tabla
     }//metodo para vaciar una tabla
+    
+    /*metodo para validar que un jtext no este vacío, recibe 1 JTexField, 1 JFrame
+    Y 1 String, que es el nombre del campo.*/
+    public static boolean validarCampo(JTextField JTF, JFrame JF, String Nombre){
+        if(JTF.getText().isBlank()){//Compara si hay algo escrito en el campo, ademas de espacios
+            showMessageDialog(JF, Nombre+" requerido");//Manda un mensaje
+            JTF.requestFocus();//Manda la atención al jtext
+            return true;
+        }//if
+        return false;
+    }//metodo para validar cualquier campo que no deba ir vacio
     
 }//clase metodos
 
