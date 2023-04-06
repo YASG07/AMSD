@@ -2,29 +2,39 @@
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
-    <Container class="javax.swing.JDialog" name="jDialog1">
+    <Container class="javax.swing.JDialog" name="jDAcProd">
       <Properties>
-        <Property name="title" type="java.lang.String" value="Guardar producto"/>
+        <Property name="title" type="java.lang.String" value="Actualizar Producto"/>
+        <Property name="location" type="java.awt.Point" editor="org.netbeans.beaninfo.editors.PointEditor">
+          <Point value="[0, 0]"/>
+        </Property>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[430, 430]"/>
+        </Property>
+        <Property name="resizable" type="boolean" value="false"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
 
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <Component id="jLabel8" min="-2" pref="50" max="-2" attributes="0"/>
+                  <Component id="lblRegresarJDAc" min="-2" pref="50" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="jLabel7" min="-2" pref="50" max="-2" attributes="0"/>
+                  <Component id="lblActualizarJDAc" min="-2" pref="50" max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jTextField8" min="-2" pref="180" max="-2" attributes="0"/>
-                      <Component id="jTextField7" min="-2" pref="180" max="-2" attributes="0"/>
-                      <Component id="jTextField6" min="-2" pref="180" max="-2" attributes="0"/>
-                      <Component id="jTextField5" min="-2" pref="180" max="-2" attributes="0"/>
-                      <Component id="jTextField4" min="-2" pref="180" max="-2" attributes="0"/>
-                      <Component id="jTextField3" min="-2" pref="180" max="-2" attributes="0"/>
-                      <Component id="jTextField2" min="-2" pref="180" max="-2" attributes="0"/>
+                      <Component id="txtPrepaAc" min="-2" pref="180" max="-2" attributes="0"/>
+                      <Component id="txtTipoAc" min="-2" pref="180" max="-2" attributes="0"/>
+                      <Component id="txtFechaExAc" min="-2" pref="180" max="-2" attributes="0"/>
+                      <Component id="txtPrecioAc" min="-2" pref="180" max="-2" attributes="0"/>
+                      <Component id="txtCostoAc" min="-2" pref="180" max="-2" attributes="0"/>
+                      <Component id="txtExisAc" min="-2" pref="180" max="-2" attributes="0"/>
+                      <Component id="txtNomAc" min="-2" pref="180" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="110" max="32767" attributes="0"/>
               </Group>
@@ -34,30 +44,30 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                  <Component id="jTextField2" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="txtNomAc" min="-2" pref="30" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jTextField3" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="txtExisAc" min="-2" pref="30" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jTextField4" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="txtCostoAc" min="-2" pref="30" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jTextField5" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="txtPrecioAc" min="-2" pref="30" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jTextField6" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="txtFechaExAc" min="-2" pref="30" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jTextField7" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="txtTipoAc" min="-2" pref="30" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jTextField8" min="-2" pref="30" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="txtPrepaAc" min="-2" pref="30" max="-2" attributes="0"/>
+                  <EmptySpace pref="15" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel7" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
-                      <Component id="jLabel8" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                      <Component id="lblActualizarJDAc" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                      <Component id="lblRegresarJDAc" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JTextField" name="jTextField2">
+        <Component class="javax.swing.JTextField" name="txtNomAc">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="0"/>
@@ -68,7 +78,7 @@
             <Property name="text" type="java.lang.String" value="Nombre:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField3">
+        <Component class="javax.swing.JTextField" name="txtExisAc">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="0"/>
@@ -79,7 +89,7 @@
             <Property name="text" type="java.lang.String" value="Existencia:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField4">
+        <Component class="javax.swing.JTextField" name="txtCostoAc">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="0"/>
@@ -90,7 +100,7 @@
             <Property name="text" type="java.lang.String" value="Costo:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField5">
+        <Component class="javax.swing.JTextField" name="txtPrecioAc">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="0"/>
@@ -101,7 +111,7 @@
             <Property name="text" type="java.lang.String" value="Precio:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField6">
+        <Component class="javax.swing.JTextField" name="txtFechaExAc">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="0"/>
@@ -112,7 +122,7 @@
             <Property name="text" type="java.lang.String" value="Fecha de esxpiraci&#xf3;n:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField7">
+        <Component class="javax.swing.JTextField" name="txtTipoAc">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="0"/>
@@ -123,7 +133,7 @@
             <Property name="text" type="java.lang.String" value="Tipo:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField8">
+        <Component class="javax.swing.JTextField" name="txtPrepaAc">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="0"/>
@@ -134,15 +144,193 @@
             <Property name="text" type="java.lang.String" value="Preparaci&#xf3;n:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel7">
+        <Component class="javax.swing.JLabel" name="lblActualizarJDAc">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Ic. Registrar"/>
+            <Property name="text" type="java.lang.String" value="Act. regis"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel8">
+        <Component class="javax.swing.JLabel" name="lblRegresarJDAc">
           <Properties>
             <Property name="text" type="java.lang.String" value="Ic. Salir"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblRegresarJDAcMouseClicked"/>
+          </Events>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JDialog" name="jDArProd">
+      <Properties>
+        <Property name="title" type="java.lang.String" value="Guardar producto"/>
+        <Property name="location" type="java.awt.Point" editor="org.netbeans.beaninfo.editors.PointEditor">
+          <Point value="[0, 0]"/>
+        </Property>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[430, 430]"/>
+        </Property>
+        <Property name="resizable" type="boolean" value="false"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <Component id="lblRegresarJDRp" min="-2" pref="50" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="lblRegistrarJDRp" min="-2" pref="50" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="txtPrepaRp" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
+                      <Component id="txtTipoRp" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
+                      <Component id="txtFechaExpRp" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
+                      <Component id="txtPrecioRp" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
+                      <Component id="txtCostoRp" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
+                      <Component id="txtExistenciaRp" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
+                      <Component id="txtNombreRp" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="110" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                  <Component id="txtNombreRp" min="-2" pref="30" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="txtExistenciaRp" min="-2" pref="30" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="txtCostoRp" min="-2" pref="30" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="txtPrecioRp" min="-2" pref="30" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="txtFechaExpRp" min="-2" pref="30" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="txtTipoRp" min="-2" pref="30" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="txtPrepaRp" min="-2" pref="30" max="-2" attributes="0"/>
+                  <EmptySpace pref="15" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lblRegistrarJDRp" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                      <Component id="lblRegresarJDRp" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JTextField" name="txtNombreRp">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="14" style="0"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="96" green="96" red="96" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Nombre:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtExistenciaRp">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="14" style="0"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="96" green="96" red="96" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Existencia:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtCostoRp">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="14" style="0"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="96" green="96" red="96" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Costo:"/>
+          </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCostoRpKeyTyped"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtPrecioRp">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="14" style="0"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="96" green="96" red="96" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Precio:"/>
+          </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtPrecioRpKeyTyped"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtFechaExpRp">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="14" style="0"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="96" green="96" red="96" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Fecha de esxpiraci&#xf3;n:"/>
+          </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtFechaExpRpKeyTyped"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtTipoRp">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="14" style="0"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="96" green="96" red="96" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Tipo:"/>
+          </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtTipoRpKeyTyped"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtPrepaRp">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="14" style="0"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="96" green="96" red="96" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Preparaci&#xf3;n:"/>
+          </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtPrepaRpKeyTyped"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblRegistrarJDRp">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Ic. Registrar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblRegistrarJDRpMouseClicked"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblRegresarJDRp">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Ic. Salir"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblRegresarJDRpMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -179,20 +367,20 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jComboBox1" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                          <Component id="jLabel3" alignment="0" min="-2" pref="72" max="-2" attributes="0"/>
+                          <Component id="jcCriBusqueda" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                          <Component id="lblGuardar" alignment="0" min="-2" pref="72" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel4" min="-2" pref="70" max="-2" attributes="0"/>
+                              <Component id="lblActualizar" min="-2" pref="70" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jLabel5" min="-2" pref="70" max="-2" attributes="0"/>
+                              <Component id="lblEliminar" min="-2" pref="70" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jTextField1" min="-2" pref="200" max="-2" attributes="0"/>
+                              <Component id="txtBuscar" min="-2" pref="200" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jLabel1" pref="86" max="32767" attributes="0"/>
+                              <Component id="lblBuscar" pref="86" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
@@ -201,9 +389,9 @@
               <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
-              <Component id="jLabel2" min="-2" pref="50" max="-2" attributes="0"/>
+              <Component id="lblRMenu" min="-2" pref="50" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="jLabel6" min="-2" pref="50" max="-2" attributes="0"/>
+              <Component id="lblInsumos" min="-2" pref="50" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -211,20 +399,20 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jLabel6" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jLabel2" alignment="0" pref="50" max="32767" attributes="0"/>
+                  <Component id="lblInsumos" alignment="0" max="32767" attributes="0"/>
+                  <Component id="lblRMenu" alignment="0" pref="50" max="32767" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jTextField1" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="jComboBox1" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="jLabel1" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="txtBuscar" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="jcCriBusqueda" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="lblBuscar" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel3" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
-                  <Component id="jLabel4" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
-                  <Component id="jLabel5" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                  <Component id="lblGuardar" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                  <Component id="lblActualizar" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                  <Component id="lblEliminar" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="270" max="-2" attributes="0"/>
@@ -234,38 +422,43 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="jLabel2">
+    <Component class="javax.swing.JLabel" name="lblRMenu">
       <Properties>
         <Property name="text" type="java.lang.String" value="Ic. Men&#xfa;"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblRMenuMouseClicked"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel6">
+    <Component class="javax.swing.JLabel" name="lblInsumos">
       <Properties>
         <Property name="text" type="java.lang.String" value="Ic. Insumos"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblInsumosMouseClicked"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="lblBuscar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Ic. Buscar"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblBuscarMouseClicked"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField1">
+    <Component class="javax.swing.JTextField" name="txtBuscar">
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBox1">
+    <Component class="javax.swing.JComboBox" name="jcCriBusqueda">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="14" style="0"/>
         </Property>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="8">
+          <StringArray count="4">
             <StringItem index="0" value="Criterio de b&#xfa;squeda"/>
             <StringItem index="1" value="Nombre"/>
-            <StringItem index="2" value="Existencia"/>
-            <StringItem index="3" value="Costo"/>
-            <StringItem index="4" value="Precio"/>
-            <StringItem index="5" value="Fecha expiraci&#xf3;n"/>
-            <StringItem index="6" value="Tipo"/>
-            <StringItem index="7" value="Preparaci&#xf3;n"/>
+            <StringItem index="2" value="Precio"/>
+            <StringItem index="3" value="Tipo"/>
           </StringArray>
         </Property>
       </Properties>
@@ -273,20 +466,29 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel3">
+    <Component class="javax.swing.JLabel" name="lblGuardar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Ic. Guardar"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblGuardarMouseClicked"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel4">
+    <Component class="javax.swing.JLabel" name="lblActualizar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Ic. Actualizar"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblActualizarMouseClicked"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel5">
+    <Component class="javax.swing.JLabel" name="lblEliminar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Ic. Eliminar"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblEliminarMouseClicked"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
@@ -295,17 +497,18 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="jTable1">
+        <Component class="javax.swing.JTable" name="tblProductos">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="7" rowCount="0">
-                <Column editable="true" title="Nombre" type="java.lang.Object"/>
-                <Column editable="true" title="Existencia" type="java.lang.Object"/>
-                <Column editable="true" title="Costo" type="java.lang.Object"/>
-                <Column editable="true" title="Precio" type="java.lang.Object"/>
-                <Column editable="true" title="Fc. Expiraci&#xf3;n" type="java.lang.Object"/>
-                <Column editable="true" title="Tipo" type="java.lang.Object"/>
-                <Column editable="true" title="Preparaci&#xf3;n" type="java.lang.Object"/>
+              <Table columnCount="8" rowCount="0">
+                <Column editable="false" title="Id" type="java.lang.Object"/>
+                <Column editable="false" title="Nombre Prod." type="java.lang.Object"/>
+                <Column editable="false" title="Preparacion" type="java.lang.Object"/>
+                <Column editable="false" title="Tipo Prod" type="java.lang.Object"/>
+                <Column editable="false" title="Costo Elaboracion" type="java.lang.Object"/>
+                <Column editable="false" title="Precio Producto" type="java.lang.Object"/>
+                <Column editable="false" title="Existencia" type="java.lang.Object"/>
+                <Column editable="false" title="Fecha de Expiracion" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -335,6 +538,11 @@
                   <Editor/>
                   <Renderer/>
                 </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
@@ -348,9 +556,12 @@
               </TableColumnModel>
             </Property>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
-              <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+              <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblProductosMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
