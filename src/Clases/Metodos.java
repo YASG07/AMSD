@@ -43,7 +43,6 @@ public class Metodos {
             showMessageDialog(null, "Error al conectar \n"+ex);
             return;
         }
-        showMessageDialog(null, "Conectado");
     }//Metodo para conectar con MySQL
     
     //Método para ejecutar cualquier sentencia DML que no sea SELECT.
