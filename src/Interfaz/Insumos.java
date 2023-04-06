@@ -4,10 +4,24 @@
  */
 package Interfaz;
 
+
+import java.sql.SQLException;
+import java.sql.ResultSet;
+import Clases.Metodos;
+import java.sql.PreparedStatement;
+import static Clases.Metodos.con;
+import static Clases.Metodos.st;
+import java.awt.HeadlessException;
+import java.awt.event.KeyEvent;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.showMessageDialog;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
- * @author Lenovo
+ * @author C3S4R_4LV
  */
+
 public class Insumos extends javax.swing.JFrame {
 
     /**
@@ -15,6 +29,8 @@ public class Insumos extends javax.swing.JFrame {
      */
     public Insumos() {
         initComponents();
+        Metodos.ConectarBD();
+        llenarTabla();
     }
 
     /**
@@ -27,186 +43,546 @@ public class Insumos extends javax.swing.JFrame {
     private void initComponents() {
 
         jDialog1 = new javax.swing.JDialog();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        costTextField = new javax.swing.JTextField();
+        catTextField = new javax.swing.JTextField();
+        provTextField = new javax.swing.JTextField();
+        uniTextField = new javax.swing.JTextField();
+        cantTextField = new javax.swing.JTextField();
+        nomTextField = new javax.swing.JTextField();
+        registrarLbl = new javax.swing.JLabel();
+        caducTextField = new javax.swing.JTextField();
+        salirLbl = new javax.swing.JLabel();
+        ventanaMenuLbl = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        consulTextField = new javax.swing.JTextField();
+        buscarLbl = new javax.swing.JLabel();
+        eliminarLbl = new javax.swing.JLabel();
+        actualizarLbl = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jLabel6 = new javax.swing.JLabel();
+        ventanaProdLbl = new javax.swing.JLabel();
+        f5TableLbl = new javax.swing.JLabel();
 
         jDialog1.setTitle("Guardar insumo");
 
-        jTextField5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField5.setForeground(new java.awt.Color(150, 150, 150));
-        jTextField5.setText("Costo:");
+        costTextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        costTextField.setForeground(new java.awt.Color(150, 150, 150));
+        costTextField.setText("Costo:");
+        costTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                costTextFieldKeyTyped(evt);
+            }
+        });
 
-        jTextField6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField6.setForeground(new java.awt.Color(150, 150, 150));
-        jTextField6.setText("Categoria:");
+        catTextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        catTextField.setForeground(new java.awt.Color(150, 150, 150));
+        catTextField.setText("Categoria:");
 
-        jTextField7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField7.setForeground(new java.awt.Color(150, 150, 150));
-        jTextField7.setText("Proveedor:");
+        provTextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        provTextField.setForeground(new java.awt.Color(150, 150, 150));
+        provTextField.setText("Proveedor:");
 
-        jTextField4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField4.setForeground(new java.awt.Color(150, 150, 150));
-        jTextField4.setText("Unidad de medición:");
+        uniTextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        uniTextField.setForeground(new java.awt.Color(150, 150, 150));
+        uniTextField.setText("Unidad de medición:");
 
-        jTextField3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField3.setForeground(new java.awt.Color(150, 150, 150));
-        jTextField3.setText("Cantidad:");
+        cantTextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cantTextField.setForeground(new java.awt.Color(150, 150, 150));
+        cantTextField.setText("Cantidad:");
+        cantTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                cantTextFieldKeyTyped(evt);
+            }
+        });
 
-        jTextField2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField2.setForeground(new java.awt.Color(150, 150, 150));
-        jTextField2.setText("Nombre:");
+        nomTextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        nomTextField.setForeground(new java.awt.Color(150, 150, 150));
+        nomTextField.setText("Nombre:");
 
-        jLabel7.setText("Ic. Registrar");
+        registrarLbl.setText("Ic. Registrar");
+        registrarLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        registrarLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                registrarLblMouseClicked(evt);
+            }
+        });
 
-        jTextField8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField8.setForeground(new java.awt.Color(150, 150, 150));
-        jTextField8.setText("Fecha de caducidad:");
+        caducTextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        caducTextField.setForeground(new java.awt.Color(150, 150, 150));
+        caducTextField.setText("Fecha de caducidad:");
 
-        jLabel8.setText("Ic. Salir");
+        salirLbl.setText("Ic. Salir");
+        salirLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        salirLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                salirLblMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
         jDialog1Layout.setHorizontalGroup(
             jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog1Layout.createSequentialGroup()
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jDialog1Layout.createSequentialGroup()
-                .addGap(102, 102, 102)
-                .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(118, Short.MAX_VALUE))
+                .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jDialog1Layout.createSequentialGroup()
+                        .addComponent(salirLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(244, 244, 244))
+                    .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(caducTextField)
+                        .addComponent(provTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                        .addComponent(catTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                        .addComponent(costTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                        .addComponent(uniTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                        .addComponent(cantTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                        .addComponent(nomTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addComponent(registrarLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jDialog1Layout.setVerticalGroup(
             jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDialog1Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(nomTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cantTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(uniTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(costTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(catTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(provTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(caducTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(registrarLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(salirLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Insumos");
 
-        jLabel2.setText("Ic. Menú");
+        ventanaMenuLbl.setText("Ic. Menú");
+        ventanaMenuLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ventanaMenuLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ventanaMenuLblMouseClicked(evt);
+            }
+        });
 
         jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Criterio de búsqueda", "Nombre", "Cantidad", "Unidad de medición", "Costo", "Categoria", "Proveedor", "Fecha de caducidad" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Criterio de búsqueda", "Nombre", "Cantidad", "Unidad de medición", "Proveedor", "Categoria", "Costo", "Fecha de caducidad" }));
 
-        jLabel1.setText("Ic. Buscar");
+        buscarLbl.setText("Ic. Buscar");
+        buscarLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buscarLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buscarLblMouseClicked(evt);
+            }
+        });
 
-        jLabel5.setText("Ic. Eliminar");
+        eliminarLbl.setText("Ic. Eliminar");
+        eliminarLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        eliminarLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                eliminarLblMouseClicked(evt);
+            }
+        });
 
-        jLabel4.setText("Ic. Actualizar");
+        actualizarLbl.setText("Ic. Actualizar");
+        actualizarLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        actualizarLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                actualizarLblMouseClicked(evt);
+            }
+        });
 
         jLabel3.setText("Ic. Guardar");
+        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Nombre", "Cantidad", "U. Medición", "Costo", "Categoria", "Proveedor", "Caducidad"
+                "ID", "Nombre", "Cantidad", "U. Medición", "Categoria", "Proveedor", "Costo", "Caducidad"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, true, true, true, true, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jTable1.setEditingColumn(0);
+        jTable1.setEditingRow(0);
+        jTable1.setShowGrid(true);
         jScrollPane1.setViewportView(jTable1);
 
-        jLabel6.setText("Ic. Productos");
+        ventanaProdLbl.setText("Ic. Productos");
+        ventanaProdLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ventanaProdLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ventanaProdLblMouseClicked(evt);
+            }
+        });
+
+        f5TableLbl.setText("ic.recargarTabla");
+        f5TableLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        f5TableLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                f5TableLblMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ventanaMenuLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1))
+                        .addComponent(f5TableLbl)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(110, 110, 110)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ventanaProdLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(81, 81, 81)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(actualizarLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(eliminarLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(consulTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)))
-                        .addGap(100, 100, 100)))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(buscarLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(106, 106, 106))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE))
+                    .addComponent(ventanaProdLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ventanaMenuLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(consulTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(buscarLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(actualizarLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(eliminarLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(f5TableLbl)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(31, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        Metodos.Abrir_Dialogo(jDialog1, this, 400, 500);       
+    }//GEN-LAST:event_jLabel3MouseClicked
+    
+    private void eliminarLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminarLblMouseClicked
+        try{
+            if(jTable1.getSelectedRowCount()==0){
+                showMessageDialog(this,"Seleccione un registro");
+            }else{
+                int response = JOptionPane.showConfirmDialog(this, "¿Seguro que desea eliminar el registro?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+                
+                if(response==JOptionPane.YES_OPTION){
+                    int resultado;
+                    DefaultTableModel Tabla = (DefaultTableModel) jTable1.getModel();
 
+                    PreparedStatement enunciado;
+                    enunciado = con.prepareStatement("DELETE FROM `alphamanagersd`.`insumos` WHERE (`idIns` = ?)");
+
+                    enunciado.setString(1, String.valueOf(Tabla.getValueAt(jTable1.getSelectedRow(),0)));
+
+
+                    resultado = enunciado.executeUpdate();
+                    if(resultado>0){
+
+                        Metodos.vaciarTabla(Tabla, jTable1);
+                        llenarTabla();
+                        showMessageDialog(this,"Eliminado con éxito");
+
+                    }else{
+                        showMessageDialog(this,"Ocurrió un problema al eliminar");
+                    }
+                }                
+            }
+            
+        }catch(HeadlessException | SQLException e){
+            showMessageDialog(this, "Ocurrió un error al eliminar");
+        }
+              
+    }//GEN-LAST:event_eliminarLblMouseClicked
+    
+    private void salirLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salirLblMouseClicked
+        jDialog1.setVisible(false);
+        DefaultTableModel Tabla = (DefaultTableModel) jTable1.getModel();
+        Metodos.vaciarTabla(Tabla, jTable1);
+        llenarTabla();
+        llenarTextFields();
+        caducTextField.setFocusable(false);
+    }//GEN-LAST:event_salirLblMouseClicked
+
+    private void registrarLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registrarLblMouseClicked
+        try{
+            int resultado;
+            PreparedStatement enunciado;
+            enunciado = con.prepareStatement("INSERT INTO `alphamanagersd`.`insumos` (`nombre_ins`, `cantidad_ins`, `unidadMed_ins`, `costo_ins`,`categoria_ins`, `nombreProv_ins`, `FchCaducidad`) VALUES (?,?,?,?,?,?,?)");
+            enunciado.setString(1, nomTextField.getText());
+            enunciado.setInt(2, Integer.parseInt(cantTextField.getText()));
+            enunciado.setString(3, uniTextField.getText());
+            enunciado.setFloat(4, Float.parseFloat(costTextField.getText()));
+            enunciado.setString(5, catTextField.getText());           
+            enunciado.setString(6, provTextField.getText());
+            enunciado.setString(7, caducTextField.getText());
+            
+            resultado = enunciado.executeUpdate();//ejecuta y obtiene el total de registros afectados
+            if(resultado>0){//revisa que el total de registros afectados sea mayor a 0
+                DefaultTableModel Tabla = (DefaultTableModel) jTable1.getModel();
+                Metodos.vaciarTabla(Tabla, jTable1);
+                llenarTabla();
+                showMessageDialog(this,"Datos guardados");
+                llenarTextFields(); 
+            }else{
+                showMessageDialog(this,"Ocurrio un problema al guardar");
+            }
+        }catch(HeadlessException | NumberFormatException | SQLException e){
+            showMessageDialog(this, "Revise que los datos ingresados sean correctos");
+        }//detecta las excepciones y manda un mensaje en caso de encontrarlas
+    }//GEN-LAST:event_registrarLblMouseClicked
+
+    private void cantTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cantTextFieldKeyTyped
+        if(cantTextField.getText().length() >= 4){
+            evt.consume();//evita que siga escribiendo mas de 4 caracteres
+        }
+        
+        int tecla = evt.getKeyChar();
+
+        boolean numeros = tecla >= 48 && tecla <= 57;
+        
+        if (!numeros){
+            evt.consume();//no permite que se escriban letras
+        }
+    }//GEN-LAST:event_cantTextFieldKeyTyped
+
+    private void costTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_costTextFieldKeyTyped
+        if(costTextField.getText().length() >= 9){
+            evt.consume();
+        }
+        
+        int tecla = evt.getKeyChar();
+        if (((tecla < '0') || (tecla > '9')) 
+        && (tecla != KeyEvent.VK_BACK_SPACE) && (tecla != '.' || costTextField.getText().contains("."))) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_costTextFieldKeyTyped
+    
+    private void buscarLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscarLblMouseClicked
+        
+        DefaultTableModel Tabla = (DefaultTableModel) jTable1.getModel();
+        Metodos.vaciarTabla(Tabla, jTable1);
+        //arreglo para almacenar el resultado de cada campo varia de acuerdo a los campos a consultar
+        Object [] row = new Object[8];
+        
+        try {                       
+            String query ="";
+            
+            if("".equals(consulTextField.getText())){
+                llenarTabla();
+                showMessageDialog(this,"Ingrese un dato válido");
+                evt.consume();
+            }else{
+                if(jComboBox1.getSelectedIndex()!=0){
+                    switch (jComboBox1.getSelectedIndex()) {
+                        case 1 -> query="SELECT * FROM insumos where nombre_ins like "+"'"+consulTextField.getText()+"%'";
+                        case 2 ->{ 
+                            if(!consulTextField.getText().matches("[0-9]+")){
+                                showMessageDialog(this,"Ingrese una cantidad válida");
+                                return;
+                            }
+                            query="SELECT * FROM insumos where cantidad_ins="+Integer.parseInt(consulTextField.getText());
+                        }
+                        case 3 -> query="SELECT * FROM insumos where unidadMed_ins="+"'"+consulTextField.getText()+"'";
+                        case 4 -> query="SELECT * FROM insumos where nombreProv_ins like "+"'"+consulTextField.getText()+"%'";
+                        case 5 -> query="SELECT * FROM insumos where categoria_ins like "+"'"+consulTextField.getText()+"%'";
+                        case 6 -> {
+                            query="SELECT * FROM insumos where costo_ins like "+"'"+consulTextField.getText()+"%'";
+                            System.out.println(query);
+                        }    
+                        case 7 -> query="SELECT * FROM insumos where FchCaducidad like "+"'%"+consulTextField.getText()+"%'";
+                        default -> showMessageDialog(this, "Seleccione una opción válida");
+                    }//switch
+                }else{
+                    showMessageDialog(this,"Ingrese un criterio de búsqueda válido");
+                }//else combo box sin seleccionar
+            }//else txt vacio
+                        
+           
+            //Ejecuta la sentencia SELECT con los parametros recibidos           
+            ResultSet rs = st.executeQuery(query);
+            boolean x=false;
+            
+            while(rs.next()){
+                row[0] = rs.getString(1);
+                row[1] = rs.getString(2);
+                row[2] = rs.getString(3);
+                row[3] = rs.getString(4);
+                row[4] = rs.getString(5);
+                row[5] = rs.getString(6);
+                row[6] = rs.getString(7);
+                row[7] = rs.getString(8);
+                Tabla.addRow(row);
+                x=true;
+            }
+            if(!x){
+                Metodos.vaciarTabla(Tabla, jTable1);
+                llenarTabla();
+                showMessageDialog(this,"No hay coincidencias");
+            }
+            
+        } catch (SQLException ex) {
+            Metodos.vaciarTabla(Tabla, jTable1);
+            llenarTabla(); 
+            return;
+        }//error en la sentencia SQL
+    }//GEN-LAST:event_buscarLblMouseClicked
+
+    private void actualizarLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_actualizarLblMouseClicked
+        try{
+            if(jTable1.getSelectedRowCount()==0){
+                showMessageDialog(this,"Seleccione un registro");//manda el mensaje si se ha seleccionado un registro
+            }else{
+                int response = JOptionPane.showConfirmDialog(this, "¿Seguro que desea actualizar?", "Confirmar actualización", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+                //lanza mensaje de confirmación antes de actualizar
+                if(response==JOptionPane.YES_OPTION){
+                    int resultado;
+                    DefaultTableModel Tabla = (DefaultTableModel) jTable1.getModel();
+
+                    PreparedStatement enunciado;
+                    //genera una sentencia SQL que será modificada.
+                    enunciado = con.prepareStatement("UPDATE `alphamanagersd`.`insumos` set `nombre_ins`=?,`cantidad_ins`=?,`unidadMed_ins`=?,`categoria_ins`=?,`nombreProv_ins`=?,`costo_ins`=?,`FchCaducidad`=? WHERE (`idIns` = ?)");
+                    enunciado.setString(1, String.valueOf(Tabla.getValueAt(jTable1.getSelectedRow(),1)));
+                    enunciado.setInt(2, Integer.parseInt(String.valueOf(Tabla.getValueAt(jTable1.getSelectedRow(),2))));
+                    enunciado.setString(3, String.valueOf(Tabla.getValueAt(jTable1.getSelectedRow(),3)));
+                    enunciado.setString(4, String.valueOf(Tabla.getValueAt(jTable1.getSelectedRow(),4)));
+                    enunciado.setString(5, String.valueOf(Tabla.getValueAt(jTable1.getSelectedRow(),5)));           
+                    enunciado.setFloat(6, Float.parseFloat(String.valueOf(Tabla.getValueAt(jTable1.getSelectedRow(),6))));
+                    enunciado.setString(7, String.valueOf(Tabla.getValueAt(jTable1.getSelectedRow(),7)));
+                    enunciado.setString(8, String.valueOf(Tabla.getValueAt(jTable1.getSelectedRow(),0)));
+                    //Modifican la sentencia en base a los datos en la tabla.
+                    
+                    resultado = enunciado.executeUpdate();//ejecuta la consulta y obtiene el numero de registros afectados
+                    if(resultado>0){//si es mayor a cero actualiza la tabla
+
+                        Metodos.vaciarTabla(Tabla, jTable1);
+                        llenarTabla();
+                        showMessageDialog(this,"Datos actualizados");
+
+                    }else{
+                        showMessageDialog(this,"Ocurrió un problema al actualizar");
+                    }
+                }
+            }
+                                 
+        }catch(HeadlessException | NumberFormatException | SQLException e){
+            showMessageDialog(this, "Revise que los datos ingresados sean correctos");
+        }//detecta las siguientes cualquiera de las tres siguientes excepciones.
+    }//GEN-LAST:event_actualizarLblMouseClicked
+
+    
+    private void ventanaProdLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ventanaProdLblMouseClicked
+        Productos windowProd = new Productos();
+        Metodos.Cambiar_Ventana(windowProd, this);
+    }//GEN-LAST:event_ventanaProdLblMouseClicked
+
+    private void ventanaMenuLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ventanaMenuLblMouseClicked
+        Principal windowMenu = new Principal();
+        Metodos.Cambiar_Ventana(windowMenu, this);
+    }//GEN-LAST:event_ventanaMenuLblMouseClicked
+
+    private void f5TableLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_f5TableLblMouseClicked
+        DefaultTableModel Tabla = (DefaultTableModel) jTable1.getModel();
+        Metodos.vaciarTabla(Tabla, jTable1);
+        llenarTabla();
+    }//GEN-LAST:event_f5TableLblMouseClicked
+    
+    private void llenarTextFields(){
+        nomTextField.setText("Nombre:");
+        cantTextField.setText("Cantidad:");
+        uniTextField.setText("Unidad de medición:");
+        costTextField.setText("Costo:");
+        catTextField.setText("Categoría:");
+        provTextField.setText("Proveedor:");
+        caducTextField.setText("Fecha de caducidad: ");           
+    }//metodo para reiniciar los campos del formulario registrar insumos.
+    
+    private void llenarTabla(){
+        //Inicializamos la tabla con un modelo
+        DefaultTableModel Tabla = (DefaultTableModel) jTable1.getModel();
+        //arreglo para almacenar el resultado de cada campo varia de acuerdo a los campos a consultar
+        Object [] row = new Object[8];
+        
+        try {
+            //inicializamos la variable de tipo statemente
+            st = con.createStatement();
+            //sentencia SELECT a ejecutar
+            String query = "SELECT * FROM insumos";
+            //Ejecuta la sentencia SELECT con los parametros recibidos
+            ResultSet rs = st.executeQuery(query);
+            while(rs.next()){
+                row[0] = rs.getString(1);
+                row[1] = rs.getString(2);
+                row[2] = rs.getString(3);
+                row[3] = rs.getString(4);
+                row[4] = rs.getString(5);
+                row[5] = rs.getString(6);
+                row[6] = rs.getString(7);
+                row[7] = rs.getString(8);
+                
+                Tabla.addRow(row);
+                //el tipo de dato varia en función del campo al que correponde
+                //el numero de instrucciones debe coincidir con el total de campos en la tabla
+            }//ciclo while guarda los valores obtenidos de la consulta en las varibables que se muestran.
+        } catch (SQLException ex) {
+            showMessageDialog(this, "Error en "+ex);
+            System.exit(EXIT_ON_CLOSE);
+            //En caso de encontrar dicha excepción envia un mensaje y termina el bloque
+        }//error en la sentencia SQL
+    }//metodo para llenar la tabla
     /**
      * @param args the command line arguments
      */
@@ -236,6 +612,7 @@ public class Insumos extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Insumos().setVisible(true);
             }
@@ -243,25 +620,27 @@ public class Insumos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel actualizarLbl;
+    private javax.swing.JLabel buscarLbl;
+    private javax.swing.JTextField caducTextField;
+    private javax.swing.JTextField cantTextField;
+    private javax.swing.JTextField catTextField;
+    private javax.swing.JTextField consulTextField;
+    private javax.swing.JTextField costTextField;
+    private javax.swing.JLabel eliminarLbl;
+    private javax.swing.JLabel f5TableLbl;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JDialog jDialog1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
+    private javax.swing.JTextField nomTextField;
+    private javax.swing.JTextField provTextField;
+    private javax.swing.JLabel registrarLbl;
+    private javax.swing.JLabel salirLbl;
+    private javax.swing.JTextField uniTextField;
+    private javax.swing.JLabel ventanaMenuLbl;
+    private javax.swing.JLabel ventanaProdLbl;
     // End of variables declaration//GEN-END:variables
+
 }
