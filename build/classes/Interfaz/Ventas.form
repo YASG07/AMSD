@@ -311,6 +311,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Ic. Men&#xfa;"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblMenuMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblRegistrar">
       <Properties>

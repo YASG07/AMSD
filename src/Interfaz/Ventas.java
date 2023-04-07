@@ -174,6 +174,11 @@ public class Ventas extends javax.swing.JFrame {
         jLabel1.setText("Ic. Buscar");
 
         lblMenu.setText("Ic. Menú");
+        lblMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblMenuMouseClicked(evt);
+            }
+        });
 
         lblRegistrar.setText("Ic. Guardar");
         lblRegistrar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -281,6 +286,12 @@ public class Ventas extends javax.swing.JFrame {
                 +ganancia+","+costoTotal+",'"+estado+"','"+empleado+"');";
         RUD(INSERT, this);
     }//GEN-LAST:event_lblRegVentaMouseClicked
+
+    private void lblMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMenuMouseClicked
+        // TODO add your handling code here:
+        Principal menu = new Principal();
+        Cambiar_Ventana(menu, this);
+    }//GEN-LAST:event_lblMenuMouseClicked
 
     /**
      * @param args the command line arguments
