@@ -4,6 +4,7 @@
  */
 package Clases;
 
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -105,6 +106,17 @@ public class Metodos {
         return false;
     }//metodo para validar cualquier campo que no deba ir vacio
     
+    //recibe el txt a reiniciar y el texto original
+    public static void reiniciarTxt(JTextField JTF, String campo){
+        JTF.setForeground(Color.gray);
+        JTF.setText(campo);
+    }//metodo para reiniciar txt
+    
+    //recibe el txt a usar
+    public static void usarTxt(JTextField JTF){
+        JTF.setText("");
+        JTF.setForeground(Color.black);
+    }//metodo usar txt
 }//clase metodos
 
 /*//Ejemplo de como hacer una consulta a la BD

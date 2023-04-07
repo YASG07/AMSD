@@ -6,14 +6,19 @@ package Interfaz;
 
 import static Clases.Metodos.*;
 import java.awt.Color;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.showMessageDialog;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author Lenovo
  */
 public class Ventas extends javax.swing.JFrame {
 
-    private String Fecha = "";
+    private DefaultTableModel Tabla;
+    private String Fecha;
     private float precioTotal = 0;
     private float ganancia = 0;
     private float costoTotal = 0;
@@ -26,8 +31,8 @@ public class Ventas extends javax.swing.JFrame {
     public Ventas() {
         initComponents();
         ConectarBD();
-        estado = "Completada";
         empleado = Interfaz.Login.Usuario;
+        llenarTabla();
     }
 
     private boolean ValidarFecha(){
@@ -39,6 +44,32 @@ public class Ventas extends javax.swing.JFrame {
         }//if
         return false;
     }//validacion del campo fecha
+    
+    private void llenarTabla(){
+        //Inicializamos la tabla con un modelo
+        Tabla = (DefaultTableModel) tblVentas.getModel();
+        //arreglo para almacenar el resultado de cada campo
+        Object [] row = new Object[7];
+        try{
+            //inicializamos la variable de tipo statemente
+            st = con.createStatement();
+            String query = "SELECT * FROM Ventas";
+            //Ejecuta la sentencia SELECT con los parametros recibidos
+            ResultSet rs = st.executeQuery(query);
+            while(rs.next()){
+                row[0] = rs.getInt(1);
+                row[1] = rs.getDate(2);
+                row[2] = rs.getFloat(3);
+                row[3] = rs.getFloat(4);
+                row[4] = rs.getFloat(5);
+                row[5] = rs.getString(6);
+                row[6] = rs.getString(7);
+                Tabla.addRow(row);
+        }
+        }catch (SQLException ex) {
+            showMessageDialog(this, "Error: "+ex);
+        }//error en la consulta
+    }//metodo llenar tabla
     //metodo para validar el campo fecha
     /**
      * This method is called from within the constructor to initialize the form.
@@ -79,8 +110,18 @@ public class Ventas extends javax.swing.JFrame {
                 txtFechaFocusGained(evt);
             }
         });
+        txtFecha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtFechaKeyTyped(evt);
+            }
+        });
 
         lblCancelar.setText("Ic. Cancelar");
+        lblCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblCancelarMouseClicked(evt);
+            }
+        });
 
         lblRegVenta.setText("Ic. Registrar");
         lblRegVenta.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -166,7 +207,7 @@ public class Ventas extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Producto", "Fecha", "Total", "Costo", "Ganancia", "Estado", "Empleado"
+                "Numero", "Fecha", "Total", "Ganancia", "Costo", "Estado", "Empleado"
             }
         ));
         jScrollPane1.setViewportView(tblVentas);
@@ -254,6 +295,7 @@ public class Ventas extends javax.swing.JFrame {
     private void lblRegistrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegistrarMouseClicked
         // TODO add your handling code here:
         Abrir_Dialogo(jdRegVenta, this, 430, 270);
+        estado = "Completada";
     }//GEN-LAST:event_lblRegistrarMouseClicked
 
     private void btEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEstadoActionPerformed
@@ -270,8 +312,7 @@ public class Ventas extends javax.swing.JFrame {
 
     private void txtFechaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFechaFocusGained
         // TODO add your handling code here:
-        txtFecha.setText("");
-        txtFecha.setForeground(Color.black);
+        usarTxt(txtFecha);
     }//GEN-LAST:event_txtFechaFocusGained
 
     private void lblRegVentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegVentaMouseClicked
@@ -285,6 +326,8 @@ public class Ventas extends javax.swing.JFrame {
         String INSERT = "INSERT INTO ventas VALUES (DEFAULT,'"+Fecha+"',"+precioTotal+","
                 +ganancia+","+costoTotal+",'"+estado+"','"+empleado+"');";
         RUD(INSERT, this);
+        vaciarTabla(Tabla, tblVentas);
+        llenarTabla();
     }//GEN-LAST:event_lblRegVentaMouseClicked
 
     private void lblMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMenuMouseClicked
@@ -292,6 +335,19 @@ public class Ventas extends javax.swing.JFrame {
         Principal menu = new Principal();
         Cambiar_Ventana(menu, this);
     }//GEN-LAST:event_lblMenuMouseClicked
+
+    private void lblCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCancelarMouseClicked
+        // TODO add your handling code here:
+        reiniciarTxt(txtFecha, "Fecha:");
+        jdRegVenta.dispose();
+    }//GEN-LAST:event_lblCancelarMouseClicked
+
+    private void txtFechaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFechaKeyTyped
+        // TODO add your handling code here:
+        if(txtFecha.getText().length() == 10){
+            evt.consume();
+        }//if
+    }//GEN-LAST:event_txtFechaKeyTyped
 
     /**
      * @param args the command line arguments
