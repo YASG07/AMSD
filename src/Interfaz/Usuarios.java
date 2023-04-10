@@ -4,17 +4,24 @@
  */
 package Interfaz;
 
+import static Clases.Metodos.*;
+import java.awt.Color;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import static javax.swing.JOptionPane.showMessageDialog;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author Lenovo
  */
 public class Usuarios extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Usuarios
-     */
+    
+    private DefaultTableModel Tabla;
+    
     public Usuarios() {
         initComponents();
+        ConectarBD();
+        llenarTabla("");
     }
 
     /**
@@ -28,20 +35,20 @@ public class Usuarios extends javax.swing.JFrame {
 
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtBuscar = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        tblUsuario = new javax.swing.JTable();
+        txtNombre = new javax.swing.JTextField();
+        txtContra = new javax.swing.JTextField();
+        txtRContra = new javax.swing.JTextField();
+        txtTelefono = new javax.swing.JTextField();
+        txtRfc = new javax.swing.JTextField();
+        cmbRol = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        txtCurp = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Usuarios");
@@ -49,14 +56,29 @@ public class Usuarios extends javax.swing.JFrame {
         jLabel2.setText("Ic. Menú");
 
         jLabel1.setText("Ic. Buscar");
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
 
         jLabel3.setText("Ic. Guardar");
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
 
         jLabel4.setText("Ic. Actualizar");
 
         jLabel5.setText("Ic. Eliminar");
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblUsuario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -64,37 +86,85 @@ public class Usuarios extends javax.swing.JFrame {
                 "Nombre", "Rol", "Telefono", "RFC", "CURP"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblUsuario);
 
-        jTextField2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField2.setForeground(new java.awt.Color(150, 150, 150));
-        jTextField2.setText("Nombre de usuario:");
+        txtNombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtNombre.setForeground(java.awt.Color.gray);
+        txtNombre.setText("Nombre de usuario:");
+        txtNombre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtNombreFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNombreFocusLost(evt);
+            }
+        });
 
-        jTextField3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField3.setForeground(new java.awt.Color(150, 150, 150));
-        jTextField3.setText("Contraseña:");
+        txtContra.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtContra.setForeground(java.awt.Color.gray);
+        txtContra.setText("Contraseña:");
+        txtContra.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtContraFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtContraFocusLost(evt);
+            }
+        });
 
-        jTextField4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField4.setForeground(new java.awt.Color(150, 150, 150));
-        jTextField4.setText("Repetir contraseña:");
+        txtRContra.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtRContra.setForeground(java.awt.Color.gray);
+        txtRContra.setText("Repetir contraseña:");
+        txtRContra.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtRContraFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtRContraFocusLost(evt);
+            }
+        });
 
-        jTextField5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField5.setForeground(new java.awt.Color(150, 150, 150));
-        jTextField5.setText("Telefono:");
+        txtTelefono.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtTelefono.setForeground(java.awt.Color.gray);
+        txtTelefono.setText("Teléfono:");
+        txtTelefono.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtTelefonoFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtTelefonoFocusLost(evt);
+            }
+        });
 
-        jTextField6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField6.setForeground(new java.awt.Color(150, 150, 150));
-        jTextField6.setText("RFC:");
+        txtRfc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtRfc.setForeground(java.awt.Color.gray);
+        txtRfc.setText("RFC:");
+        txtRfc.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtRfcFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtRfcFocusLost(evt);
+            }
+        });
 
-        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar rol", "Empleado ventas", "Empleado almacén" }));
+        cmbRol.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cmbRol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar rol", "Empleado ventas", "Empleado almacén" }));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Formulario para registrar usuario");
 
-        jTextField7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField7.setForeground(new java.awt.Color(150, 150, 150));
-        jTextField7.setText("CURP:");
+        txtCurp.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtCurp.setForeground(java.awt.Color.gray);
+        txtCurp.setText("CURP:");
+        txtCurp.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtCurpFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCurpFocusLost(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -116,7 +186,7 @@ public class Usuarios extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,14 +197,14 @@ public class Usuarios extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtRContra, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                            .addComponent(txtContra, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtTelefono, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                            .addComponent(txtRfc, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                            .addComponent(cmbRol, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE))
+                            .addComponent(txtCurp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE))
                         .addGap(55, 55, 55))))
         );
         layout.setVerticalGroup(
@@ -145,7 +215,7 @@ public class Usuarios extends javax.swing.JFrame {
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -157,19 +227,19 @@ public class Usuarios extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtContra, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtRContra, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtRfc, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtCurp, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmbRol, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(25, Short.MAX_VALUE))
@@ -177,6 +247,176 @@ public class Usuarios extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    private void llenarTabla(String nom){
+        Tabla = (DefaultTableModel) tblUsuario.getModel();
+        Object [] row = new Object[5];
+        try{
+            st = con.createStatement();
+            String query = "SELECT PK_NombreU,roles_idRol,telefono,RFC,CURP FROM usuarios WHERE PK_NombreU like '"+nom+"%'";
+            ResultSet rs = st.executeQuery(query);
+            while(rs.next()){
+                row[0] = rs.getString(1);
+                row[1] = rs.getInt(2);
+                row[2] = rs.getInt(3);
+                row[3] = rs.getString(4);
+                row[4] = rs.getString(5);
+                Tabla.addRow(row);
+        }
+        }catch (SQLException ex) {
+            showMessageDialog(this, "Error: "+ex);
+        }
+    }
+    
+    private boolean validarContraseña(){
+        if(!txtContra.getText().equals(txtRContra.getText()))return true;
+        else return false;
+    }
+    
+    private boolean validarVacios(){
+        if(txtNombre.getText().equals("Nombre de usuario:") || txtContra.getText().equals("Contraseña:") || 
+                txtRContra.getText().equals("Repetir contraseña:") || txtTelefono.getText().equals("Teléfono:") ||
+                txtRfc.getText().equals("RFC:") || txtCurp.getText().equals("CURP:") ||
+                cmbRol.getSelectedItem().equals("Seleccionar rol"))return true;
+        else return false;
+    }
+    
+    private boolean validarTelefono(){
+        if(!txtTelefono.getText().matches("^\\d{12}$"))return true;
+        else return false;
+    }
+    
+    private boolean validarRFC(){
+        if(!txtTelefono.getText().matches("^([A-ZÑ\\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1]))([A-Z\\d]{3})$"))return true;
+        else return false;
+    }
+    
+    private boolean validarCurp(){
+        if(!txtCurp.getText().matches("^[A-Z]{1}[AEIOU]{1}[A-Z]{2}" +
+        "[0-9]{2}(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])" +
+        "[HM]{1}" +
+        "(AS|BC|BS|CC|CS|CH|CL|CM|DF|DG|GT|GR|HG|JC|MC|MN|MS|NT|NL|OC|PL|QT|QR|SP|SL|SR|TC|TS|TL|VZ|YN|ZS|NE)" +
+        "[B-DF-HJ-NP-TV-Z]{3}" +
+        "[0-9A-Z]{1}" +
+        "[0-9]{1}$"))return true;
+        else return false;
+    }
+    
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        if(validarVacios())showMessageDialog(this, "Rellene todos los campos");
+        else if(validarContraseña())showMessageDialog(this, "Las contraseñas no coinciden");
+        else if(validarTelefono())showMessageDialog(this, "El teléfono no es correcto");
+        else if(validarRFC())showMessageDialog(this, "El RFC no es correcto");
+        else if(validarCurp())showMessageDialog(this, "La CURP no es correcta");
+        else{
+            int num=1;//Rol de prueba
+            String st_inserta = "INSERT INTO usuarios(PK_NombreU, contraseña_user, CURP, RFC, telefono, roles_idRol)"
+                                 +"VALUES('"+txtNombre.getText()+"','"+txtContra.getText()+"','"+txtCurp.getText()
+                                 +"','"+txtRfc.getText()+"','"+txtTelefono.getText()+"','"+num+"')";
+            RUD(st_inserta,this);
+        }
+    }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void txtNombreFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreFocusGained
+        if(txtNombre.getText().equals("Nombre de usuario:")){
+            txtNombre.setText("");
+            txtNombre.setForeground(Color.black);
+        }
+    }//GEN-LAST:event_txtNombreFocusGained
+
+    private void txtNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreFocusLost
+        if(txtNombre.getText().equals("")){
+            txtNombre.setText("Nombre de usuario:");
+            txtNombre.setForeground(Color.gray);
+        }
+    }//GEN-LAST:event_txtNombreFocusLost
+
+    private void txtContraFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtContraFocusGained
+        if(txtContra.getText().equals("Contraseña:")){
+            txtContra.setText("");
+            txtContra.setForeground(Color.black);
+        }
+    }//GEN-LAST:event_txtContraFocusGained
+
+    private void txtContraFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtContraFocusLost
+        if(txtContra.getText().equals("")){
+            txtContra.setText("Contraseña:");
+            txtContra.setForeground(Color.gray);
+        }
+    }//GEN-LAST:event_txtContraFocusLost
+
+    private void txtRContraFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtRContraFocusGained
+        if(txtRContra.getText().equals("Repetir contraseña:")){
+            txtRContra.setText("");
+            txtRContra.setForeground(Color.black);
+        }
+    }//GEN-LAST:event_txtRContraFocusGained
+
+    private void txtRContraFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtRContraFocusLost
+        if(txtRContra.getText().equals("")){
+            txtRContra.setText("Repetir contraseña:");
+            txtRContra.setForeground(Color.gray);
+        }
+    }//GEN-LAST:event_txtRContraFocusLost
+
+    private void txtTelefonoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTelefonoFocusGained
+        if(txtTelefono.getText().equals("Teléfono:")){
+            txtTelefono.setText("");
+            txtTelefono.setForeground(Color.black);
+        }
+    }//GEN-LAST:event_txtTelefonoFocusGained
+
+    private void txtTelefonoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTelefonoFocusLost
+        if(txtTelefono.getText().equals("")){
+            txtTelefono.setText("Teléfono:");
+            txtTelefono.setForeground(Color.gray);
+        }
+    }//GEN-LAST:event_txtTelefonoFocusLost
+
+    private void txtRfcFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtRfcFocusGained
+        if(txtRfc.getText().equals("RFC:")){
+            txtRfc.setText("");
+            txtRfc.setForeground(Color.black);
+        }
+    }//GEN-LAST:event_txtRfcFocusGained
+
+    private void txtRfcFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtRfcFocusLost
+        if(txtRfc.getText().equals("")){
+            txtRfc.setText("RFC:");
+            txtRfc.setForeground(Color.gray);
+        }
+    }//GEN-LAST:event_txtRfcFocusLost
+
+    private void txtCurpFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCurpFocusGained
+        if(txtCurp.getText().equals("CURP:")){
+            txtCurp.setText("");
+            txtCurp.setForeground(Color.black);
+        }
+    }//GEN-LAST:event_txtCurpFocusGained
+
+    private void txtCurpFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCurpFocusLost
+        if(txtCurp.getText().equals("")){
+            txtCurp.setText("CURP:");
+            txtCurp.setForeground(Color.gray);
+        }
+    }//GEN-LAST:event_txtCurpFocusLost
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        int fila = tblUsuario.getSelectedRow();
+        if (fila < 0) {
+            showMessageDialog(null, "No ha seleccionado un usuario");
+        } else {
+            String query = "DELETE FROM usuarios where PK_NombreU='"+tblUsuario.getValueAt(fila, 0).toString()+"'";
+            RUD(query,this);
+            vaciarTabla(Tabla, tblUsuario);
+            llenarTabla("");
+        }
+    }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        vaciarTabla(Tabla, tblUsuario);
+        llenarTabla(txtBuscar.getText());
+    }//GEN-LAST:event_jLabel1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -214,7 +454,7 @@ public class Usuarios extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cmbRol;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -222,13 +462,13 @@ public class Usuarios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
+    private javax.swing.JTable tblUsuario;
+    private javax.swing.JTextField txtBuscar;
+    private javax.swing.JTextField txtContra;
+    private javax.swing.JTextField txtCurp;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtRContra;
+    private javax.swing.JTextField txtRfc;
+    private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 }
