@@ -130,6 +130,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Nombre:"/>
           </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNomAcKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtExisAc">
           <Properties>
@@ -141,6 +144,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Existencia:"/>
           </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtExisAcKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtCostoAc">
           <Properties>
@@ -152,6 +158,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Costo:"/>
           </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCostoAcKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtPrecioAc">
           <Properties>
@@ -163,6 +172,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Precio:"/>
           </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtPrecioAcKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtFechaExAc">
           <Properties>
@@ -174,6 +186,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Fecha de expiraci&#xf3;n:"/>
           </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtFechaExAcKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtTipoAc">
           <Properties>
@@ -185,6 +200,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Tipo:"/>
           </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtTipoAcKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtPrepaAc">
           <Properties>
@@ -196,6 +214,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Preparaci&#xf3;n:"/>
           </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtPrepaAcKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblActualizarJDAc">
           <Properties>
@@ -346,6 +367,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Nombre:"/>
           </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNombreRpKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtExistenciaRp">
           <Properties>
@@ -357,6 +381,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Existencia:"/>
           </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtExistenciaRpKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtCostoRp">
           <Properties>

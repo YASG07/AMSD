@@ -9,6 +9,7 @@ import static Clases.Metodos.con;
 import static Clases.Metodos.st;
 import java.awt.Event;
 import java.awt.event.KeyEvent;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
@@ -159,30 +160,65 @@ public class Productos extends javax.swing.JFrame {
         txtNomAc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtNomAc.setForeground(new java.awt.Color(150, 150, 150));
         txtNomAc.setText("Nombre:");
+        txtNomAc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNomAcKeyTyped(evt);
+            }
+        });
 
         txtExisAc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtExisAc.setForeground(new java.awt.Color(150, 150, 150));
         txtExisAc.setText("Existencia:");
+        txtExisAc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtExisAcKeyTyped(evt);
+            }
+        });
 
         txtCostoAc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtCostoAc.setForeground(new java.awt.Color(150, 150, 150));
         txtCostoAc.setText("Costo:");
+        txtCostoAc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCostoAcKeyTyped(evt);
+            }
+        });
 
         txtPrecioAc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtPrecioAc.setForeground(new java.awt.Color(150, 150, 150));
         txtPrecioAc.setText("Precio:");
+        txtPrecioAc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPrecioAcKeyTyped(evt);
+            }
+        });
 
         txtFechaExAc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtFechaExAc.setForeground(new java.awt.Color(150, 150, 150));
         txtFechaExAc.setText("Fecha de expiración:");
+        txtFechaExAc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtFechaExAcKeyTyped(evt);
+            }
+        });
 
         txtTipoAc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtTipoAc.setForeground(new java.awt.Color(150, 150, 150));
         txtTipoAc.setText("Tipo:");
+        txtTipoAc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTipoAcKeyTyped(evt);
+            }
+        });
 
         txtPrepaAc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtPrepaAc.setForeground(new java.awt.Color(150, 150, 150));
         txtPrepaAc.setText("Preparación:");
+        txtPrepaAc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPrepaAcKeyTyped(evt);
+            }
+        });
 
         lblActualizarJDAc.setText("Act. regis");
         lblActualizarJDAc.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -306,10 +342,20 @@ public class Productos extends javax.swing.JFrame {
         txtNombreRp.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtNombreRp.setForeground(new java.awt.Color(150, 150, 150));
         txtNombreRp.setText("Nombre:");
+        txtNombreRp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreRpKeyTyped(evt);
+            }
+        });
 
         txtExistenciaRp.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtExistenciaRp.setForeground(new java.awt.Color(150, 150, 150));
         txtExistenciaRp.setText("Existencia:");
+        txtExistenciaRp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtExistenciaRpKeyTyped(evt);
+            }
+        });
 
         txtCostoRp.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtCostoRp.setForeground(new java.awt.Color(150, 150, 150));
@@ -561,13 +607,13 @@ public class Productos extends javax.swing.JFrame {
             int CostoPr = (int) tblProductos.getValueAt(fila, 4);
             int PrecioP = (int) tblProductos.getValueAt(fila, 5);
             int existen = (int) tblProductos.getValueAt(fila, 6);
-            Date fechEx =  (Date) tblProductos.getValueAt(fila, 7);
-            
+            Date fechEx = (Date) tblProductos.getValueAt(fila, 7);
+
             txtNomAc.setText(nomP);
-            txtExisAc.setText(""+existen);
-            txtCostoAc.setText(""+CostoPr);
-            txtPrecioAc.setText(""+PrecioP);
-            txtFechaExAc.setText(""+fechEx);
+            txtExisAc.setText("" + existen);
+            txtCostoAc.setText("" + CostoPr);
+            txtPrecioAc.setText("" + PrecioP);
+            txtFechaExAc.setText("" + fechEx);
             txtTipoAc.setText(TipoP);
             txtPrepaAc.setText(Prepa);
         }
@@ -609,7 +655,7 @@ public class Productos extends javax.swing.JFrame {
 
     private void txtCostoRpKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCostoRpKeyTyped
         int key = evt.getKeyChar();
-        if (Character.isDigit(key) || key == KeyEvent.VK_BACK_SPACE || key == KeyEvent.VK_ENTER) {
+        if (Character.isDigit(key) || key == KeyEvent.VK_BACK_SPACE || key == KeyEvent.VK_ENTER || key == '.') {
             if (key == KeyEvent.VK_ENTER) {
                 txtPrecioRp.requestFocus();
             }
@@ -623,7 +669,7 @@ public class Productos extends javax.swing.JFrame {
 
     private void txtPrecioRpKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioRpKeyTyped
         int key = evt.getKeyChar();
-        if (Character.isDigit(key) || key == KeyEvent.VK_BACK_SPACE || key == KeyEvent.VK_ENTER) {
+        if (Character.isDigit(key) || key == KeyEvent.VK_BACK_SPACE || key == KeyEvent.VK_ENTER || key == '.') {
             if (key == KeyEvent.VK_ENTER) {
                 txtFechaExpRp.requestFocus();
             }
@@ -648,11 +694,7 @@ public class Productos extends javax.swing.JFrame {
     }//GEN-LAST:event_txtFechaExpRpKeyTyped
 
     private void txtPrepaRpKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrepaRpKeyTyped
-        int key = evt.getKeyChar();
-        if (key == KeyEvent.VK_ENTER) {
-            //registrar();
-            showMessageDialog(this, "hola");
-        }
+        
     }//GEN-LAST:event_txtPrepaRpKeyTyped
 
     private void txtTipoRpKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTipoRpKeyTyped
@@ -755,26 +797,28 @@ public class Productos extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_lblBuscarMouseClicked
-    private void actualizar(){
-        String nomP = txtNombreRp.getText();
-        String Prepa = txtPrepaRp.getText();
-        String tipoP = txtTipoRp.getText();
-        float costoP = Float.parseFloat(txtCostoRp.getText());
-        float precioP = Float.parseFloat(txtPrecioRp.getText());
-        float existP = Float.parseFloat(txtExistenciaRp.getText());
-        String fechaEx = txtFechaExpRp.getText();
+    private void actualizar() {
+
         try {
-            if(nomP.equals("")){
-                
-            }else{
-                String sql = "UPDATE Productos set idProduc='"+idc+"', nombre_produc='"+nomP+"', preparacion_produc='"+Prepa+"', tipo_produc='"+tipoP+"', costo_produc='"+costoP
-                           +"', precio_produc='"+precioP+"', existencia='"+existP+"', FchExpira='"+fechaEx+"' WHERE idProduc="+idc;
-                st = con.createStatement();
-                st.executeUpdate(sql);
+            String sql = "UPDATE PRODUCTOS SET nombre_produc = ?, preparacion_produc = ?, tipo_produc = ?, costo_produc = ?, precio_produc = ?, existencia = ?, FchExpira = ?";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setString(1, txtNomAc.getText());
+            pst.setString(2, txtPrepaAc.getText());
+            pst.setString(3, txtTipoAc.getText());
+            pst.setFloat(4, Float.parseFloat(txtCostoAc.getText()));
+            pst.setFloat(5, Float.parseFloat(txtPrecioAc.getText()));
+            pst.setInt(6, Integer.parseInt(txtExisAc.getText()));
+            pst.setString(7, txtFechaExAc.getText());
+            int n = pst.executeUpdate();
+            if (n > 0) {
                 showMessageDialog(this, "Producto Actualizado");
+            } else {
+                showMessageDialog(this, "Ocurrio un error al modificar");
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             showMessageDialog(this, e);
+        } catch (NumberFormatException e) {
+
         }
     }
     private void lblActualizarJDAcMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblActualizarJDAcMouseClicked
@@ -782,6 +826,110 @@ public class Productos extends javax.swing.JFrame {
         Metodos.vaciarTabla(m, tblProductos);
         llenarTabla();
     }//GEN-LAST:event_lblActualizarJDAcMouseClicked
+
+    private void txtExistenciaRpKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtExistenciaRpKeyTyped
+        int key = evt.getKeyChar();
+        if (Character.isDigit(key) || key == KeyEvent.VK_BACK_SPACE || key == KeyEvent.VK_ENTER) {
+            if (key == KeyEvent.VK_ENTER) {
+                txtCostoRp.requestFocus();
+            }
+        } else {
+            evt.consume();
+            showMessageDialog(this, "Por favor introducir solo números");
+        }
+    }//GEN-LAST:event_txtExistenciaRpKeyTyped
+
+    private void txtNombreRpKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreRpKeyTyped
+        int key = evt.getKeyChar();
+        if (Character.isLetter(key) || key == KeyEvent.VK_BACK_SPACE || key == KeyEvent.VK_ENTER) {
+            if (key == KeyEvent.VK_ENTER) {
+                txtExistenciaRp.requestFocus();
+            }
+        } else {
+            evt.consume();
+            showMessageDialog(this, "Por favor introducir solo Letras");
+        }
+    }//GEN-LAST:event_txtNombreRpKeyTyped
+
+    private void txtNomAcKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomAcKeyTyped
+        int key = evt.getKeyChar();
+        if (Character.isLetter(key) || key == KeyEvent.VK_BACK_SPACE || key == KeyEvent.VK_ENTER) {
+            if (key == KeyEvent.VK_ENTER) {
+                txtExisAc.requestFocus();
+            }
+        } else {
+            evt.consume();
+            showMessageDialog(this, "Por favor introducir solo Letras");
+        }
+    }//GEN-LAST:event_txtNomAcKeyTyped
+
+    private void txtExisAcKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtExisAcKeyTyped
+        int key = evt.getKeyChar();
+        if (Character.isDigit(key) || key == KeyEvent.VK_BACK_SPACE || key == KeyEvent.VK_ENTER) {
+            if (key == KeyEvent.VK_ENTER) {
+                txtCostoAc.requestFocus();
+            }
+        } else {
+            evt.consume();
+            showMessageDialog(this, "Por favor introducir solo números");
+        }
+    }//GEN-LAST:event_txtExisAcKeyTyped
+
+    private void txtCostoAcKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCostoAcKeyTyped
+        int key = evt.getKeyChar();
+        if (Character.isDigit(key) || key == KeyEvent.VK_BACK_SPACE || key == KeyEvent.VK_ENTER || key == '.') {
+            if (key == KeyEvent.VK_ENTER) {
+                txtPrecioAc.requestFocus();
+            }
+        } else {
+            evt.consume();
+            showMessageDialog(this, "Por favor introducir solo números");
+        }
+        ////
+    }//GEN-LAST:event_txtCostoAcKeyTyped
+
+    private void txtPrecioAcKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioAcKeyTyped
+        int key = evt.getKeyChar();
+        if (Character.isDigit(key) || key == KeyEvent.VK_BACK_SPACE || key == KeyEvent.VK_ENTER || key == '.') {
+            if (key == KeyEvent.VK_ENTER) {
+                txtFechaExAc.requestFocus();
+            }
+        } else {
+            evt.consume();
+            showMessageDialog(this, "Por favor introducir solo números");
+        }
+        ////
+    }//GEN-LAST:event_txtPrecioAcKeyTyped
+
+    private void txtFechaExAcKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFechaExAcKeyTyped
+       int key = evt.getKeyChar();
+        if (Character.isDigit(key) || key == KeyEvent.VK_BACK_SPACE || key == KeyEvent.VK_ENTER || key == '-') {
+            if (key == KeyEvent.VK_ENTER) {
+                txtTipoAc.requestFocus();
+            }
+        } else {
+            evt.consume();
+            showMessageDialog(this, "Por favor introducir solo números");
+        }
+        //// 
+    }//GEN-LAST:event_txtFechaExAcKeyTyped
+
+    private void txtTipoAcKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTipoAcKeyTyped
+       int key = evt.getKeyChar();
+        if (Character.isLetter(key) || key == KeyEvent.VK_BACK_SPACE || key == KeyEvent.VK_ENTER) {
+            if (key == KeyEvent.VK_ENTER) {
+                txtPrepaAc.requestFocus();
+            }
+        } else {
+            evt.consume();
+            showMessageDialog(this, "Por favor introducir solo letras");
+        }
+        ////  
+    }//GEN-LAST:event_txtTipoAcKeyTyped
+
+    private void txtPrepaAcKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrepaAcKeyTyped
+        
+    }//GEN-LAST:event_txtPrepaAcKeyTyped
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
