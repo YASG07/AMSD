@@ -31,6 +31,8 @@ public class Insumos extends javax.swing.JFrame {
         initComponents();
         Metodos.ConectarBD();
         llenarTabla();
+        if(Login.Rol == 2)
+            ventanaMenuLbl.setVisible(false);
     }
 
     /**

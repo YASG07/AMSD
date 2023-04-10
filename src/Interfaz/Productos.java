@@ -31,7 +31,8 @@ public class Productos extends javax.swing.JFrame {
         initComponents();
         Metodos.ConectarBD();
         llenarTabla();
-
+        if(Login.Rol == 2)
+            lblRMenu.setVisible(false);
     }
 
     int idc;

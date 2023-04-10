@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import static javax.swing.JOptionPane.showMessageDialog;
@@ -117,6 +118,16 @@ public class Metodos {
         JTF.setText("");
         JTF.setForeground(Color.black);
     }//metodo usar txt
+    
+    //recibe el combobox y el jdialog
+    public static boolean validarComboBox(JComboBox JCB, JFrame JF) {
+        if(JCB.getSelectedIndex() == 0){
+            showMessageDialog(JF,"Seleccione una opción de la lista");
+            JCB.requestFocus();
+            return false;
+        }//if
+        return true;
+    }//metodo para validar un combobox
 }//clase metodos
 
 /*//Ejemplo de como hacer una consulta a la BD
