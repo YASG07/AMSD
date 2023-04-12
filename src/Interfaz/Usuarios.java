@@ -6,8 +6,11 @@ package Interfaz;
 
 import static Clases.Metodos.*;
 import java.awt.Color;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import static javax.swing.JOptionPane.showMessageDialog;
 import javax.swing.table.DefaultTableModel;
 /**
@@ -22,8 +25,10 @@ public class Usuarios extends javax.swing.JFrame {
         initComponents();
         ConectarBD();
         llenarTabla("");
+        btnCancelar.setVisible(false);
+        btnActualizar.setVisible(false);
     }
-
+    String nombreActualizar;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,9 +41,9 @@ public class Usuarios extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        btnCancelar = new javax.swing.JLabel();
+        Actu1 = new javax.swing.JLabel();
+        btnEliminar = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblUsuario = new javax.swing.JTable();
         txtNombre = new javax.swing.JTextField();
@@ -49,6 +54,8 @@ public class Usuarios extends javax.swing.JFrame {
         cmbRol = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         txtCurp = new javax.swing.JTextField();
+        btnGuardar = new javax.swing.JLabel();
+        btnActualizar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Usuarios");
@@ -62,19 +69,24 @@ public class Usuarios extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("Ic. Guardar");
-        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnCancelar.setText("Ic. Cancelar");
+        btnCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel3MouseClicked(evt);
+                btnCancelarMouseClicked(evt);
             }
         });
 
-        jLabel4.setText("Ic. Actualizar");
-
-        jLabel5.setText("Ic. Eliminar");
-        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+        Actu1.setText("Ic. Actualizar");
+        Actu1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel5MouseClicked(evt);
+                Actu1MouseClicked(evt);
+            }
+        });
+
+        btnEliminar.setText("Ic. Eliminar");
+        btnEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEliminarMouseClicked(evt);
             }
         });
 
@@ -149,7 +161,7 @@ public class Usuarios extends javax.swing.JFrame {
         });
 
         cmbRol.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cmbRol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar rol", "Empleado ventas", "Empleado almacén" }));
+        cmbRol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar rol", "Empleado almacén", "Empleado ventas" }));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Formulario para registrar usuario");
@@ -163,6 +175,20 @@ public class Usuarios extends javax.swing.JFrame {
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtCurpFocusLost(evt);
+            }
+        });
+
+        btnGuardar.setText("Ic. Guardar");
+        btnGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnGuardarMouseClicked(evt);
+            }
+        });
+
+        btnActualizar.setText("Ic. Actualizar");
+        btnActualizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnActualizarMouseClicked(evt);
             }
         });
 
@@ -182,30 +208,30 @@ public class Usuarios extends javax.swing.JFrame {
                         .addGap(44, 44, 44)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(Actu1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(242, 264, Short.MAX_VALUE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(33, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(txtRContra, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtContra, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtTelefono, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtRfc, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cmbRol, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtCurp, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtRContra, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-                            .addComponent(txtContra, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTelefono, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-                            .addComponent(txtRfc, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-                            .addComponent(cmbRol, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtCurp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE))
-                        .addGap(55, 55, 55))))
+                        .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(55, 55, 55))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -219,8 +245,8 @@ public class Usuarios extends javax.swing.JFrame {
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Actu1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -241,7 +267,10 @@ public class Usuarios extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(cmbRol, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
@@ -258,7 +287,7 @@ public class Usuarios extends javax.swing.JFrame {
             while(rs.next()){
                 row[0] = rs.getString(1);
                 row[1] = rs.getInt(2);
-                row[2] = rs.getInt(3);
+                row[2] = rs.getString(3);
                 row[3] = rs.getString(4);
                 row[4] = rs.getString(5);
                 Tabla.addRow(row);
@@ -287,7 +316,7 @@ public class Usuarios extends javax.swing.JFrame {
     }
     
     private boolean validarRFC(){
-        if(!txtTelefono.getText().matches("^([A-ZÑ\\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1]))([A-Z\\d]{3})$"))return true;
+        if(!txtRfc.getText().matches("^([A-ZÑ\\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1]))([A-Z\\d]{3})$"))return true;
         else return false;
     }
     
@@ -302,21 +331,22 @@ public class Usuarios extends javax.swing.JFrame {
         else return false;
     }
     
-    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
-        if(validarVacios())showMessageDialog(this, "Rellene todos los campos");
-        else if(validarContraseña())showMessageDialog(this, "Las contraseñas no coinciden");
-        else if(validarTelefono())showMessageDialog(this, "El teléfono no es correcto");
-        else if(validarRFC())showMessageDialog(this, "El RFC no es correcto");
-        else if(validarCurp())showMessageDialog(this, "La CURP no es correcta");
-        else{
-            int num=1;//Rol de prueba
-            String st_inserta = "INSERT INTO usuarios(PK_NombreU, contraseña_user, CURP, RFC, telefono, roles_idRol)"
-                                 +"VALUES('"+txtNombre.getText()+"','"+txtContra.getText()+"','"+txtCurp.getText()
-                                 +"','"+txtRfc.getText()+"','"+txtTelefono.getText()+"','"+num+"')";
-            RUD(st_inserta,this);
-        }
-    }//GEN-LAST:event_jLabel3MouseClicked
-
+    private void limpiarFormulario(){
+        txtNombre.setText("Nombre de usuario:");
+        txtNombre.setForeground(Color.gray);
+        txtContra.setText("Contraseña:");
+        txtContra.setForeground(Color.gray);
+        txtRContra.setText("Repetir contraseña:");
+        txtRContra.setForeground(Color.gray);
+        txtTelefono.setText("Teléfono:");
+        txtTelefono.setForeground(Color.gray);
+        txtRfc.setText("RFC:");
+        txtRfc.setForeground(Color.gray);
+        txtCurp.setText("CURP:");
+        txtCurp.setForeground(Color.gray);
+        cmbRol.setSelectedIndex(0);
+    }
+    
     private void txtNombreFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreFocusGained
         if(txtNombre.getText().equals("Nombre de usuario:")){
             txtNombre.setText("");
@@ -401,7 +431,7 @@ public class Usuarios extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtCurpFocusLost
 
-    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+    private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
         int fila = tblUsuario.getSelectedRow();
         if (fila < 0) {
             showMessageDialog(null, "No ha seleccionado un usuario");
@@ -411,12 +441,100 @@ public class Usuarios extends javax.swing.JFrame {
             vaciarTabla(Tabla, tblUsuario);
             llenarTabla("");
         }
-    }//GEN-LAST:event_jLabel5MouseClicked
+    }//GEN-LAST:event_btnEliminarMouseClicked
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         vaciarTabla(Tabla, tblUsuario);
         llenarTabla(txtBuscar.getText());
     }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void btnGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseClicked
+        if(validarVacios())showMessageDialog(this, "Rellene todos los campos");
+        else if(validarContraseña())showMessageDialog(this, "Las contraseñas no coinciden");
+        else if(validarTelefono())showMessageDialog(this, "El teléfono no es correcto");
+        else if(validarRFC())showMessageDialog(this, "El RFC no es correcto");
+        else if(validarCurp())showMessageDialog(this, "La CURP no es correcta");
+        else{
+            String st_inserta = "INSERT INTO usuarios(PK_NombreU, contraseña_user, CURP, RFC, telefono, roles_idRol)"
+                                 +"VALUES('"+txtNombre.getText()+"','"+txtContra.getText()+"','"+txtCurp.getText()
+                                 +"','"+txtRfc.getText()+"','"+txtTelefono.getText()+"','"+(cmbRol.getSelectedIndex()+1)+"')";
+            RUD(st_inserta,this);
+            vaciarTabla(Tabla, tblUsuario);
+            llenarTabla("");
+            limpiarFormulario();
+        }
+    }//GEN-LAST:event_btnGuardarMouseClicked
+
+    private void btnActualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnActualizarMouseClicked
+        if(validarVacios())showMessageDialog(this, "Rellene todos los campos");
+        else if(validarContraseña())showMessageDialog(this, "Las contraseñas no coinciden");
+        else if(validarTelefono())showMessageDialog(this, "El teléfono no es correcto");
+        else if(validarRFC())showMessageDialog(this, "El RFC no es correcto");
+        else if(validarCurp())showMessageDialog(this, "La CURP no es correcta");
+        else{
+            try {
+            String sql = "UPDATE usuarios SET PK_NombreU = ?, contraseña_user = ?, CURP = ?, RFC = ?, telefono = ?, roles_idRol = ? WHERE PK_NombreU = '"+nombreActualizar+"'";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setString(1, txtNombre.getText());
+            pst.setString(2, txtContra.getText());
+            pst.setString(3, txtCurp.getText());
+            pst.setString(4, txtRfc.getText());
+            pst.setString(5, txtTelefono.getText());
+            pst.setInt(6, cmbRol.getSelectedIndex()+1);
+            int n = pst.executeUpdate();
+            if (n > 0) {
+                showMessageDialog(this, "Usuario Actualizado");
+                vaciarTabla(Tabla, tblUsuario);
+                llenarTabla("");
+                btnCancelar.setVisible(false);
+                btnActualizar.setVisible(false);
+                btnGuardar.setVisible(true);
+                limpiarFormulario();
+                
+            } else {
+                showMessageDialog(this, "Ocurrio un error al modificar");
+            }
+            } catch (SQLException e) {
+                showMessageDialog(this, e);
+            }
+        }
+        
+    }//GEN-LAST:event_btnActualizarMouseClicked
+
+    private void Actu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Actu1MouseClicked
+        int fila = tblUsuario.getSelectedRow();
+        if (fila < 0) {
+            showMessageDialog(null, "Seleccione al usuario a actualizar");
+        } else {
+            btnCancelar.setVisible(true);
+            btnActualizar.setVisible(true);
+            btnGuardar.setVisible(false);
+            try {
+                st = con.createStatement();
+                String query = "SELECT * FROM usuarios WHERE PK_NombreU= '"+tblUsuario.getValueAt(fila, 0).toString()+"'";
+                ResultSet rs = st.executeQuery(query);
+                while(rs.next()){
+                    txtNombre.setText(rs.getString(1));
+                    nombreActualizar=rs.getString(1);
+                    txtContra.setText(rs.getString(2));
+                    txtRContra.setText(rs.getString(2));
+                    txtCurp.setText(rs.getString(3));
+                    txtRfc.setText(rs.getString(4));
+                    txtTelefono.setText(rs.getString(5));
+                    cmbRol.setSelectedIndex(rs.getInt(6)-1);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(Usuarios.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_Actu1MouseClicked
+
+    private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
+        btnCancelar.setVisible(false);
+        btnActualizar.setVisible(false);
+        btnGuardar.setVisible(true);
+        limpiarFormulario();
+    }//GEN-LAST:event_btnCancelarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -454,12 +572,14 @@ public class Usuarios extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Actu1;
+    private javax.swing.JLabel btnActualizar;
+    private javax.swing.JLabel btnCancelar;
+    private javax.swing.JLabel btnEliminar;
+    private javax.swing.JLabel btnGuardar;
     private javax.swing.JComboBox<String> cmbRol;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblUsuario;

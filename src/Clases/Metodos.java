@@ -36,7 +36,7 @@ public class Metodos {
             Class.forName("com.mysql.cj.jdbc.Driver");
             /*Nombre del servidor, base de datos que se quiere emplear, 
             usuario y contraseña con la que se conecta al servidor*/
-            con = DriverManager.getConnection("jdbc:mysql://localhost/alphamanagersd","root","1234");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/alphamanagersd","root","1324");
         } catch (ClassNotFoundException ex) {
             //En caso de encontrar dicha excepción envia un mensaje y termina el bloque
             showMessageDialog(null, "Ocurrio un error inesperado "+ex);

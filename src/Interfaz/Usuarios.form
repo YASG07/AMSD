@@ -38,9 +38,9 @@
                       <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="jLabel4" min="-2" pref="70" max="-2" attributes="0"/>
+                              <Component id="Actu1" min="-2" pref="70" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jLabel5" min="-2" pref="70" max="-2" attributes="0"/>
+                              <Component id="btnEliminar" min="-2" pref="70" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="txtBuscar" min="-2" pref="200" max="-2" attributes="0"/>
@@ -50,27 +50,25 @@
                       </Group>
                   </Group>
               </Group>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="242" pref="264" max="32767" attributes="0"/>
-                      <Component id="jLabel3" min="-2" pref="72" max="-2" attributes="0"/>
-                      <EmptySpace pref="33" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
+              <EmptySpace pref="84" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                  <Component id="txtRContra" alignment="0" max="32767" attributes="0"/>
+                  <Component id="txtContra" alignment="0" max="32767" attributes="0"/>
+                  <Component id="txtTelefono" alignment="0" max="32767" attributes="0"/>
+                  <Component id="txtRfc" alignment="0" max="32767" attributes="0"/>
+                  <Component id="cmbRol" alignment="0" max="32767" attributes="0"/>
+                  <Component id="txtNombre" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jLabel6" alignment="0" max="32767" attributes="0"/>
+                  <Component id="txtCurp" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="btnCancelar" min="-2" pref="72" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="txtRContra" alignment="0" pref="220" max="32767" attributes="0"/>
-                          <Component id="txtContra" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtTelefono" alignment="0" pref="220" max="32767" attributes="0"/>
-                          <Component id="txtRfc" alignment="0" pref="220" max="32767" attributes="0"/>
-                          <Component id="cmbRol" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtNombre" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jLabel6" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtCurp" alignment="0" pref="220" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                      <Component id="btnActualizar" min="-2" pref="72" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnGuardar" min="-2" pref="72" max="-2" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -87,8 +85,8 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel4" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
-                          <Component id="jLabel5" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                          <Component id="Actu1" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                          <Component id="btnEliminar" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="26" max="32767" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" pref="270" max="-2" attributes="0"/>
@@ -111,7 +109,11 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="cmbRol" min="-2" pref="30" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jLabel3" min="-2" pref="50" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btnCancelar" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                          <Component id="btnGuardar" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                          <Component id="btnActualizar" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
               <EmptySpace pref="25" max="32767" attributes="0"/>
@@ -135,25 +137,28 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txtBuscar">
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel3">
+    <Component class="javax.swing.JLabel" name="btnCancelar">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Ic. Guardar"/>
+        <Property name="text" type="java.lang.String" value="Ic. Cancelar"/>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel3MouseClicked"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnCancelarMouseClicked"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel4">
+    <Component class="javax.swing.JLabel" name="Actu1">
       <Properties>
         <Property name="text" type="java.lang.String" value="Ic. Actualizar"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Actu1MouseClicked"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel5">
+    <Component class="javax.swing.JLabel" name="btnEliminar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Ic. Eliminar"/>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel5MouseClicked"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnEliminarMouseClicked"/>
       </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -293,8 +298,8 @@
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="3">
             <StringItem index="0" value="Seleccionar rol"/>
-            <StringItem index="1" value="Empleado ventas"/>
-            <StringItem index="2" value="Empleado almac&#xe9;n"/>
+            <StringItem index="1" value="Empleado almac&#xe9;n"/>
+            <StringItem index="2" value="Empleado ventas"/>
           </StringArray>
         </Property>
       </Properties>
@@ -323,6 +328,22 @@
       <Events>
         <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtCurpFocusGained"/>
         <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtCurpFocusLost"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="btnGuardar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ic. Guardar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnGuardarMouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="btnActualizar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ic. Actualizar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnActualizarMouseClicked"/>
       </Events>
     </Component>
   </SubComponents>
