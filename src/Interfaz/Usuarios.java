@@ -11,7 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static javax.swing.JOptionPane.showMessageDialog;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.*;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -29,6 +30,7 @@ public class Usuarios extends javax.swing.JFrame {
         btnActualizar.setVisible(false);
     }
     String nombreActualizar;
+    Object[] options = {"Confirmar","Cancelar"};
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -61,11 +63,17 @@ public class Usuarios extends javax.swing.JFrame {
         setTitle("Usuarios");
 
         jLabel2.setText("Ic. Menú");
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
 
         jLabel1.setText("Ic. Buscar");
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
+
+        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarKeyReleased(evt);
             }
         });
 
@@ -282,11 +290,13 @@ public class Usuarios extends javax.swing.JFrame {
         Object [] row = new Object[5];
         try{
             st = con.createStatement();
-            String query = "SELECT PK_NombreU,roles_idRol,telefono,RFC,CURP FROM usuarios WHERE PK_NombreU like '"+nom+"%'";
+            String query = "SELECT PK_NombreU,roles.nombre_rol,telefono,RFC,CURP FROM usuarios" 
+                    +" inner join roles on idRol=roles_idRol WHERE PK_NombreU like '"+nom+"%'";
+                   
             ResultSet rs = st.executeQuery(query);
             while(rs.next()){
                 row[0] = rs.getString(1);
-                row[1] = rs.getInt(2);
+                row[1] = rs.getString(2);
                 row[2] = rs.getString(3);
                 row[3] = rs.getString(4);
                 row[4] = rs.getString(5);
@@ -436,17 +446,18 @@ public class Usuarios extends javax.swing.JFrame {
         if (fila < 0) {
             showMessageDialog(null, "No ha seleccionado un usuario");
         } else {
-            String query = "DELETE FROM usuarios where PK_NombreU='"+tblUsuario.getValueAt(fila, 0).toString()+"'";
-            RUD(query,this);
-            vaciarTabla(Tabla, tblUsuario);
-            llenarTabla("");
+            int opcion = showOptionDialog(this,
+                "¿Desea eliminar ese registro?",
+                "Confirmar",YES_NO_OPTION,QUESTION_MESSAGE,null,
+                options,options[0]);
+            if(opcion==0){
+                String query = "DELETE FROM usuarios where PK_NombreU='"+tblUsuario.getValueAt(fila, 0).toString()+"'";
+                RUD(query,this);
+                vaciarTabla(Tabla, tblUsuario);
+                llenarTabla("");
+            }         
         }
     }//GEN-LAST:event_btnEliminarMouseClicked
-
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-        vaciarTabla(Tabla, tblUsuario);
-        llenarTabla(txtBuscar.getText());
-    }//GEN-LAST:event_jLabel1MouseClicked
 
     private void btnGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseClicked
         if(validarVacios())showMessageDialog(this, "Rellene todos los campos");
@@ -473,27 +484,33 @@ public class Usuarios extends javax.swing.JFrame {
         else if(validarCurp())showMessageDialog(this, "La CURP no es correcta");
         else{
             try {
-            String sql = "UPDATE usuarios SET PK_NombreU = ?, contraseña_user = ?, CURP = ?, RFC = ?, telefono = ?, roles_idRol = ? WHERE PK_NombreU = '"+nombreActualizar+"'";
-            PreparedStatement pst = con.prepareStatement(sql);
-            pst.setString(1, txtNombre.getText());
-            pst.setString(2, txtContra.getText());
-            pst.setString(3, txtCurp.getText());
-            pst.setString(4, txtRfc.getText());
-            pst.setString(5, txtTelefono.getText());
-            pst.setInt(6, cmbRol.getSelectedIndex()+1);
-            int n = pst.executeUpdate();
-            if (n > 0) {
-                showMessageDialog(this, "Usuario Actualizado");
-                vaciarTabla(Tabla, tblUsuario);
-                llenarTabla("");
-                btnCancelar.setVisible(false);
-                btnActualizar.setVisible(false);
-                btnGuardar.setVisible(true);
-                limpiarFormulario();
+                int opcion = showOptionDialog(this,
+                "¿Desea actualizar ese registro?",
+                "Confirmar",YES_NO_OPTION,QUESTION_MESSAGE,null,
+                options,options[0]);
                 
-            } else {
-                showMessageDialog(this, "Ocurrio un error al modificar");
-            }
+                if(opcion==0){
+                    String sql = "UPDATE usuarios SET PK_NombreU = ?, contraseña_user = ?, CURP = ?, RFC = ?, telefono = ?, roles_idRol = ? WHERE PK_NombreU = '"+nombreActualizar+"'";
+                    PreparedStatement pst = con.prepareStatement(sql);
+                    pst.setString(1, txtNombre.getText());
+                    pst.setString(2, txtContra.getText());
+                    pst.setString(3, txtCurp.getText());
+                    pst.setString(4, txtRfc.getText());
+                    pst.setString(5, txtTelefono.getText());
+                    pst.setInt(6, cmbRol.getSelectedIndex()+1);
+                    int n = pst.executeUpdate();
+                    if (n > 0) {
+                        showMessageDialog(this, "Usuario Actualizado");
+                        vaciarTabla(Tabla, tblUsuario);
+                        llenarTabla("");
+                        btnCancelar.setVisible(false);
+                        btnActualizar.setVisible(false);
+                        btnGuardar.setVisible(true);
+                        limpiarFormulario();
+
+                    } else {showMessageDialog(this, "Ocurrio un error al modificar");}
+                }
+                
             } catch (SQLException e) {
                 showMessageDialog(this, e);
             }
@@ -535,6 +552,16 @@ public class Usuarios extends javax.swing.JFrame {
         btnGuardar.setVisible(true);
         limpiarFormulario();
     }//GEN-LAST:event_btnCancelarMouseClicked
+
+    private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
+        vaciarTabla(Tabla, tblUsuario);
+        llenarTabla(txtBuscar.getText());
+    }//GEN-LAST:event_txtBuscarKeyReleased
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        Principal menu = new Principal();
+        Cambiar_Ventana(menu, this);
+    }//GEN-LAST:event_jLabel2MouseClicked
 
     /**
      * @param args the command line arguments
